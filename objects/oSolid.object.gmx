@@ -82,6 +82,7 @@ tl2_delete_layer = -112;
             <string>active = 1;
 if (material == -1) material = global.floormaterial;
 if (tileid != 0) visible = false;
+visible = true;
 </string>
           </argument>
         </arguments>
@@ -98,7 +99,7 @@ if (tileid != 0) visible = false;
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>oSolid</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>

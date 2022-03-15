@@ -1,0 +1,13 @@
+// draw_text_ext_border(x,y,text,sep,w);
+var c = draw_get_color();
+draw_set_color(c_black);
+draw_text_ext(argument0-1,argument1-1,argument2,argument3,argument4);
+draw_text_ext(argument0-1,argument1,argument2,argument3,argument4);
+draw_text_ext(argument0-1,argument1+1,argument2,argument3,argument4);
+draw_text_ext(argument0,argument1-1,argument2,argument3,argument4);
+draw_text_ext(argument0,argument1+1,argument2,argument3,argument4);
+draw_text_ext(argument0+1,argument1-1,argument2,argument3,argument4);
+draw_text_ext(argument0+1,argument1,argument2,argument3,argument4);
+draw_text_ext(argument0+1,argument1+1,argument2,argument3,argument4);
+draw_set_color(c);
+draw_text_ext(argument0,argument1,argument2,argument3,argument4);

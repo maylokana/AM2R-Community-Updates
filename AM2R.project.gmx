@@ -4074,6 +4074,8 @@
       <script>scripts\draw_txt_1button.gml</script>
       <script>scripts\draw_txt_2buttons.gml</script>
       <script>scripts\draw_game_surface.gml</script>
+      <script>scripts\draw_text_border.gml</script>
+      <script>scripts\draw_text_ext_border.gml</script>
     </scripts>
     <scripts name="Enemy">
       <script>scripts\enemy_active_check.gml</script>
@@ -4328,6 +4330,13 @@
       <script>scripts\set_8bit_shader.gml</script>
       <script>scripts\mus_boss_fadein.gml</script>
       <script>scripts\set_widescreen.gml</script>
+    </scripts>
+    <scripts name="TimeTrial">
+      <script>scripts\cursor_blinking.gml</script>
+      <script>scripts\time_string.gml</script>
+      <script>scripts\set_map_info.gml</script>
+      <script>scripts\start_trial.gml</script>
+      <script>scripts\goal_trial.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5373,6 +5382,11 @@
       <object>objects\oAreaIntro</object>
       <object>objects\oA3_Missiles_Glow</object>
     </objects>
+    <objects name="TimeTrial">
+      <object>objects\oTrialSelect</object>
+      <object>objects\oTrialLogic</object>
+      <object>objects\oTTrialSB</object>
+    </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\timelineCrystal</timeline>
@@ -5795,6 +5809,13 @@
       <room>rooms\rm_TranslationTest</room>
       <room>rooms\rm_a6a10B</room>
       <room>rooms\rm_gameplay</room>
+    </rooms>
+    <rooms name="TimeTrial">
+      <room>rooms\trialselectroom</room>
+      <rooms name="Ingame">
+        <room>rooms\map0</room>
+        <room>rooms\map1</room>
+      </rooms>
     </rooms>
   </rooms>
   <constants number="10">

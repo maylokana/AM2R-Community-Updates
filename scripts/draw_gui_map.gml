@@ -1,4 +1,5 @@
 /// draw_gui_map(x, y)
+/*
 draw_background(bgGUIMapBG, argument0, argument1 + 4);
 if (oControl.m1 != "0") draw_mapblock(argument0 + 16, argument1 + 12, string_char_at(oControl.m1, 1), string_char_at(oControl.m1, 2), string_char_at(oControl.m1, 3), string_char_at(oControl.m1, 4), string_char_at(oControl.m1, 5), string_char_at(oControl.m1, 6), oControl.dm1, string_char_at(oControl.m1, 7));
 if (oControl.m2 != "0") draw_mapblock(argument0, argument1 + 4, string_char_at(oControl.m2, 1), string_char_at(oControl.m2, 2), string_char_at(oControl.m2, 3), string_char_at(oControl.m2, 4), string_char_at(oControl.m2, 5), string_char_at(oControl.m2, 6), oControl.dm2, string_char_at(oControl.m2, 7));
@@ -29,3 +30,23 @@ if (global.mapmarker) {
     if (oControl.moffy > 1 && oControl.moffx > 2) draw_sprite_ext(sHUDMapMarkB, oControl.markfr, argument0 + 32, argument1 + 28, 1, -1, 0, -1, 1);
     if (oControl.moffy > 1 && oControl.moffx < -2) draw_sprite_ext(sHUDMapMarkB, oControl.markfr, argument0 + 8, argument1 + 28, -1, -1, 0, -1, 1);
 }
+*/
+draw_set_font(fontGUI2Default);
+// clock
+draw_set_color(c_gray);
+if (oTrialLogic.timer_started == 1) then draw_set_color(c_white);
+draw_set_halign(fa_right);
+draw_text_border(argument0+5,argument1+3,time_string(oTrialLogic.timer));
+// speedometer
+draw_set_color(c_white);
+draw_set_halign(fa_right);
+var sp = abs(round(oCharacter.xVel*100));
+draw_text_border(argument0+5,argument1+13,string(sp));
+var sb = round(oCharacter.speedboost_steps/1.1);
+if (sb > 100) then sb = 100;
+if (oCharacter.speedboost == 1) then sb = 100;
+draw_text_border(argument0+5,argument1+23,string(sb));
+draw_set_halign(fa_left);
+draw_text_border(argument0+10,argument1+3,"TIME");
+draw_text_border(argument0+10,argument1+13,"f/s");
+draw_text_border(argument0+10,argument1+23,"%");

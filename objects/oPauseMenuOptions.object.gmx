@@ -124,8 +124,8 @@ global.tiptext = tip[global.curropt];
             active = 0;
         }
         if (global.curropt == 1) {
-            instance_create(50, 92, oOptionsReload);
-            instance_destroy();
+            //instance_create(50, 92, oOptionsReload);
+            //instance_destroy();
         }
         if (global.curropt == 2) {
             instance_create(50, 92, oOptionsMain);
@@ -191,6 +191,7 @@ op1.label = get_text("PauseMenu", "Resume");
 op2 = instance_create(x, y + 16, oPauseOption);
 op2.optionid = 1;
 op2.label = get_text("PauseMenu", "Restart");
+op2.alarm[0] = 1;
 op3 = instance_create(x, y + 32, oPauseOption);
 op3.optionid = 2;
 op3.label = get_text("PauseMenu", "Options");

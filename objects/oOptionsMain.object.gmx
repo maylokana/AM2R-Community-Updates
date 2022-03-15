@@ -145,7 +145,7 @@ global.tiptext = tip[global.curropt];
             } else {
                 save_gameoptions();
                 global.curropt = 4; // used to be 3, menu shifted
-                room_change(titleroom, 0); //room_goto(titleroom);
+                room_change(trialselectroom, 0); //room_goto(titleroom);
             }
         }
     } // if (oControl.kMenu1 &amp;&amp; oControl.kMenu1PushedSteps == 0)

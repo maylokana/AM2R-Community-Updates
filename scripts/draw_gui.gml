@@ -249,28 +249,28 @@ draw_sprite(sGUIPBomb, 1, xoff + 1, 4);
 } else draw_sprite(sGUIPBomb, 0, xoff + 1, 4);
 }
 }
+
 if (global.ophudshowmap && global.ophudshowmetrcount) {
-draw_background(bgGUIMap, 250 + widescreen_space, 0);
+//draw_background(bgGUIMap, 250 + widescreen_space, 0);
 xoff = 250;
 }
 if (global.ophudshowmap && global.ophudshowmetrcount == 0) draw_background(bgGUIMapOnly, 272 + widescreen_space, 0);
 if (global.ophudshowmap == 0 && global.ophudshowmetrcount) {
-draw_background(bgGUIMetOnly, 296 + widescreen_space, 0);
+//draw_background(bgGUIMetOnly, 296 + widescreen_space, 0);
 xoff = 296;
 }
 if (global.ophudshowmetrcount) {
 if (global.ophudshowmetrcount == 1) {
-draw_background(bgGUIMetCountBG1, xoff + 4 + widescreen_space, 4);
-draw_text(xoff + 6 + widescreen_space, 21, to_string_lz(global.monstersarea));
+//draw_background(bgGUIMetCountBG1, xoff + 4 + widescreen_space, 4);
+//draw_text(xoff + 6 + widescreen_space, 21, to_string_lz(global.monstersarea));
 }
 if (global.ophudshowmetrcount == 2) {
-draw_background(bgGUIMetCountBG2, xoff + 4 + widescreen_space, 4);
-draw_text(xoff + 6 + widescreen_space, 21, to_string_lz(global.monstersleft));
+//draw_background(bgGUIMetCountBG2, xoff + 4 + widescreen_space, 4);
+//draw_text(xoff + 6 + widescreen_space, 21, to_string_lz(global.monstersleft));
 }
 }
 if (global.ophudshowmap) draw_gui_map(276 + widescreen_space, 0);
 } // if (global.classicmode == 0 && global.opshowhud)
-
 
 /* ORIGINAL
 /// draw_gui()
