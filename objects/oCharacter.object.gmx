@@ -610,10 +610,6 @@ xGlow = 0;
           <argument>
             <kind>1</kind>
             <string>characterDrawEvent();
-
-draw_set_color(c_white);
-draw_set_halign(fa_left);
-draw_text_border(x,y-20,"state: "+string(state));
 </string>
           </argument>
         </arguments>
