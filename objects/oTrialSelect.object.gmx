@@ -133,6 +133,7 @@ if (sel &gt; available_maps-1) then sel = 0;
 if (sel &lt; 0) then sel = available_maps-1;
 if (oControl.kMenu1Pressed){
    sfx_play(sndMenuSel);
+   global.trial_is = map_info[5,sel];
    start_trial();
 }
 if (oControl.kMenu2Pressed){

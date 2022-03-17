@@ -5387,7 +5387,13 @@
       <object>objects\oTrialGoal</object>
       <object>objects\oTrialLogic</object>
       <object>objects\oTrialAutoad</object>
-      <object>objects\oTTrialSB</object>
+      <object>objects\oTTBooster</object>
+      <object>objects\oTTHijump</object>
+      <object>objects\oTTPGrip</object>
+      <object>objects\oTTBomb</object>
+      <object>objects\oTTSpring</object>
+      <object>objects\oTTMissile</object>
+      <object>objects\oTTSuper</object>
     </objects>
   </objects>
   <timelines name="timelines">

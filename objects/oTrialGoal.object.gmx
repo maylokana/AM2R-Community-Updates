@@ -50,6 +50,7 @@
             <kind>1</kind>
             <string>mus_change(musItemAmb);
 oTrialLogic.timer_started = -1;
+goal_trial(); // the actual goal code
 instance_destroy(); // done with this object so make it not exist
 </string>
           </argument>
