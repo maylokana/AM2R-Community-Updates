@@ -160,7 +160,7 @@ alarm[0] = 60;
         if (hasmissile == 1) event_user(1);
     }
     moveTo(xVel, yVel);
-    if (y &gt; 480) state = 100;
+    if (y &gt; room_height+20) state = 100;
 } // if (state != 100)
 if (state == 100) {
     expl = instance_create(x, y, oFXAnimSpark);

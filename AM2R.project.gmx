@@ -5384,7 +5384,9 @@
     </objects>
     <objects name="TimeTrial">
       <object>objects\oTrialSelect</object>
+      <object>objects\oTrialGoal</object>
       <object>objects\oTrialLogic</object>
+      <object>objects\oTrialAutoad</object>
       <object>objects\oTTrialSB</object>
     </objects>
   </objects>

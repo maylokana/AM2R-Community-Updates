@@ -57,8 +57,8 @@ for (var r1 = 0; r1 &lt; 2; ++r1;){ // start a for loop
 }
 
 // and now that the failsafe is in let's go put info in
-set_map_info(0,"First Steps",1,"Everyone has to start somewhere, right?",map0,-1);
-set_map_info(1,"Wall-to-Wall",2,"A simple introduction to walljumping.",map1,-1);
+set_map_info(0,"Test Room",1,"Delving into the code was a mistake",map0,-1);
+set_map_info(1,"First Steps",1,"Everyone has to start somewhere, right?",map1,-1);
 </string>
           </argument>
         </arguments>
