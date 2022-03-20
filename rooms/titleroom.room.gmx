@@ -68,6 +68,7 @@ if (file_exists(working_directory + "\swap.ini")) file_delete(working_directory 
     <instance objName="oPressStart" x="160" y="184" name="inst_100002" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oDrawTitleBG" x="16" y="16" name="inst_100003" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oTitleAnimation" x="0" y="0" name="inst_100004" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSkipMain" x="0" y="32" name="inst_E26A3730" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

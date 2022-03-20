@@ -1285,6 +1285,8 @@
       <sound>sound\musCredits</sound>
       <sound>sound\musArea8</sound>
       <sound>sound\musGenesis</sound>
+      <sound>sound\musTrialsMenu</sound>
+      <sound>sound\musTrialsWin</sound>
     </sounds>
     <sounds name="A4">
       <sound>sound\sndA4AlarmLoop</sound>
@@ -3391,6 +3393,10 @@
       </sprites>
       <sprite>sprites\sShipGlow</sprite>
     </sprites>
+    <sprites name="TimeTrial">
+      <sprite>sprites\sTTButton43</sprite>
+      <sprite>sprites\sTTButton169</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bgScreenGuide</background>
@@ -4337,6 +4343,7 @@
       <script>scripts\set_map_info.gml</script>
       <script>scripts\start_trial.gml</script>
       <script>scripts\goal_trial.gml</script>
+      <script>scripts\draw_timer.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5384,6 +5391,7 @@
     </objects>
     <objects name="TimeTrial">
       <object>objects\oTrialSelect</object>
+      <object>objects\oTrialClear</object>
       <object>objects\oTrialGoal</object>
       <object>objects\oTrialLogic</object>
       <object>objects\oTrialAutoad</object>
@@ -5394,6 +5402,7 @@
       <object>objects\oTTSpring</object>
       <object>objects\oTTMissile</object>
       <object>objects\oTTSuper</object>
+      <object>objects\oSkipMain</object>
     </objects>
   </objects>
   <timelines name="timelines">
@@ -5820,6 +5829,7 @@
     </rooms>
     <rooms name="TimeTrial">
       <room>rooms\trialselectroom</room>
+      <room>rooms\trialclearroom</room>
       <rooms name="Ingame">
         <room>rooms\map0</room>
         <room>rooms\map1</room>

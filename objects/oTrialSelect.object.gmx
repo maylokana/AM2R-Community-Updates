@@ -29,8 +29,13 @@
 it's probably not an optimal way of having a menu
 i'll live my life how i want to */
 
+audio_stop_sound(musTitle); // a fix so that the og main menu theme stops playing
+
 scroll_x = 0; // background scrolling
 cursor_blink = 0; // the visual cursor blinking
+// cursor nudges used on the main menu
+nudge_x = 0;
+nudge_y = 0;
 
 flavor_text = "Flavor text goes here"; // flavor_text used on the bottom of the screen
 
@@ -84,8 +89,18 @@ set_map_info(1,"First Steps",1,"Everyone has to start somewhere, right?",map1,-1
             <string>scroll_x += 0.2;
 if (scroll_x &gt; 24) then scroll_x = 0;
 
+// cursor blink
 ++cursor_blink;
 if (cursor_blink &gt; 120) then cursor_blink = 0;
+// nudge related
+if (abs(nudge_x) &gt; 0){
+   nudge_x /= 1.6;
+   if (abs(nudge_x) &lt; 0.01) then nudge_x = 0;
+}
+if (abs(nudge_y) &gt; 0){
+   nudge_y /= 1.6;
+   if (abs(nudge_y) &lt; 0.01) then nudge_y = 0;
+}
 
 // all the menu stuffs
 if (active){
@@ -93,22 +108,83 @@ switch (cat){
 case 0: // main menu
 if (oControl.kDown &amp;&amp; oControl.kDownPushedSteps == 0){
    sfx_play(sndMenuMove);
-   ++sel;
+   nudge_y = 3;
+   switch (sel){
+          case 0:
+          sel = 2;
+          break;
+          case 1:
+          sel = 3;
+          break;
+          case 2:
+          sel = 0;
+          break;
+          case 3:
+          sel = 1;
+          break;
+   }
 }
 if (oControl.kUp &amp;&amp; oControl.kUpPushedSteps == 0){
    sfx_play(sndMenuMove);
-   --sel;
+   nudge_y = -3;
+      switch (sel){
+          case 0:
+          sel = 2;
+          break;
+          case 1:
+          sel = 3;
+          break;
+          case 2:
+          sel = 0;
+          break;
+          case 3:
+          sel = 1;
+          break;
+   }
 }
-if (sel &gt; 3) then sel = 0;
-if (sel &lt; 0) then sel = 3;
+if (oControl.kRight &amp;&amp; oControl.kRightPushedSteps == 0){
+   sfx_play(sndMenuMove);
+   nudge_x = 3;
+      switch (sel){
+          case 0:
+          sel = 1;
+          break;
+          case 1:
+          sel = 0;
+          break;
+          case 2:
+          sel = 3;
+          break;
+          case 3:
+          sel = 2;
+          break;
+   }
+}
+if (oControl.kLeft &amp;&amp; oControl.kLeftPushedSteps == 0){
+   sfx_play(sndMenuMove);
+   nudge_x = -3;
+         switch (sel){
+          case 0:
+          sel = 1;
+          break;
+          case 1:
+          sel = 0;
+          break;
+          case 2:
+          sel = 3;
+          break;
+          case 3:
+          sel = 2;
+          break;
+   }
+}
 
 if (oControl.kMenu1Pressed){
    sfx_play(sndMenuSel);
    switch (sel){
    case 0:
    cat = 1;
-   map_scroll = 80;
-   real_scroll = 80;
+   map_scroll = real_scroll;
    break;
    case 2:
    room_change(rm_options,0);
@@ -222,6 +298,7 @@ draw_text_border(300,5,"Align");
 switch (cat){
 case 0: // main menu
 // menu options
+/*
 draw_set_halign(fa_center);
 cursor_blinking(sel,0);
 draw_text_border(160,170,"Course Select");
@@ -231,6 +308,28 @@ cursor_blinking(sel,2);
 draw_text_border(160,190,"Options");
 cursor_blinking(sel,3);
 draw_text_border(160,200,"Quit Game");
+*/
+var cx = 160+nudge_x;
+var cy = 120+nudge_y;
+if (oControl.widescreen){
+cursor_blinking(sel,0);
+draw_sprite_ext(sTTButton169,0,cx-100,cy-30,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,1);
+draw_sprite_ext(sTTButton169,1,cx+100,cy-30,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,2);
+draw_sprite_ext(sTTButton169,2,cx-100,cy+72,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,3);
+draw_sprite_ext(sTTButton169,3,cx+100,cy+72,1,1,0,draw_get_color(),1);
+}else{// 4:3 buttons
+cursor_blinking(sel,0);
+draw_sprite_ext(sTTButton43,0,cx-75,cy-30,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,1);
+draw_sprite_ext(sTTButton43,1,cx+75,cy-30,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,2);
+draw_sprite_ext(sTTButton43,2,cx-75,cy+72,1,1,0,draw_get_color(),1);
+cursor_blinking(sel,3);
+draw_sprite_ext(sTTButton43,3,cx+75,cy+72,1,1,0,draw_get_color(),1);
+}
 break;
 case 1: // course select
 for (var r1 = 0; r1 &lt; available_maps; ++r1){

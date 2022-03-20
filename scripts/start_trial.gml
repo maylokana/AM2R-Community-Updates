@@ -13,4 +13,4 @@ global.mapoffsetx = 5;
 global.myposy = 5;
 global.mapoffsety = 5;
 // don't worry about it
-room_goto(room_); // go to the room designated by the var
+room_change(room_,0); // go to the room designated by the var

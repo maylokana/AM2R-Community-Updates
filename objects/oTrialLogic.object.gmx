@@ -25,12 +25,36 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visible = 0; // hide me!
+            <string>global.clear = 0;
+visible = 0; // hide me!
 // initially triallogic will merely act as a spawn point but does more than that
 alarm[0] = 1; // alarm for spawning samus
 // variables
 timer_started = 0;
 timer = 0; // in tics
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>goal_trial();
 </string>
           </argument>
         </arguments>
@@ -84,6 +108,12 @@ oCharacter.y = y;
 if (timer_started == 0) &amp;&amp; !(oCharacter.state == 33){
    mus_change(musEris);
    timer_started = 1;
+}
+
+if (keyboard_check(vk_alt)){
+      room_speed = 6;
+}else{
+      room_speed = 60;
 }
 </string>
           </argument>
