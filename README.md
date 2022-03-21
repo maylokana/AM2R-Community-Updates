@@ -1,6 +1,6 @@
 # AM2R-TimeTrials
 
-Time Trials is a fork of AM2R Community Updates that replaces the original gameloop of AM2R in favor of a series of movement courses. **If you are looking for AM2R Community Updates then [follow the link here](https://github.com/AM2R-Community-Developers/AM2R-Community-Updates).*
+Time Trials is a fork of AM2R Community Updates that replaces the original gameloop of AM2R in favor of a series of movement courses. **If you are looking for AM2R Community Updates then [follow the link here](https://github.com/AM2R-Community-Developers/AM2R-Community-Updates).**
 
 ## What is this?
 The source code for the AM2R Community Updates 1.5.x branch, free of copyrighted assets and trademarks.
