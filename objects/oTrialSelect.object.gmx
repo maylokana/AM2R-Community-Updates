@@ -50,7 +50,8 @@ real_scroll = 0; // the "real" scroll variable
 
 // this is going to be a bit of a nightmare but be ready
 available_maps = 0; // this variable will be important (trust me)
-for (var r1 = 0; r1 &lt; 2; ++r1;){ // start a for loop
+/*
+for (var r1 = 0; r1 &lt; 3; ++r1;){ // start a for loop
         // in this for loop you win
         map_info[0,r1] = "Map "+string(r1); // name of the map
         map_info[1,r1] = "Description not set. Pretend this says something really informative or something. Anyways, Shinx is a cool pokemon"; // description of the map
@@ -60,10 +61,12 @@ for (var r1 = 0; r1 &lt; 2; ++r1;){ // start a for loop
         map_info[5,r1] = map0; // room goto
         ++available_maps; // add available_maps by one
 }
-
+THIS ISN'T IMPORTANT ANYMORE
+*/
 // and now that the failsafe is in let's go put info in
-set_map_info(0,"Test Room",1,"Delving into the code was a mistake",map0,-1);
-set_map_info(1,"First Steps",1,"Everyone has to start somewhere, right?",map1,-1);
+set_map_info("Test Room",0,"Delving into the code was a mistake",map0,-1);
+set_map_info("First Steps",1,"Everyone has to start somewhere, right?",map1,-1);
+set_map_info("The Tower",4,"Don't fall, that's not good for you",the_tower,-1);
 </string>
           </argument>
         </arguments>
@@ -185,6 +188,9 @@ if (oControl.kMenu1Pressed){
    case 0:
    cat = 1;
    map_scroll = real_scroll;
+   break;
+   case 1:
+   room_change(trialeditor,0);
    break;
    case 2:
    room_change(rm_options,0);
@@ -341,7 +347,9 @@ draw_set_font(fontMenuTinyDefault);
 }
 draw_set_color(c_white);
 draw_set_halign(fa_right);
-draw_text_border(300,190,string(map_info[1,sel]));
+draw_text_border(300,180,string(map_info[1,sel]));
+difficulty_string(map_info[2,sel]);
+draw_set_color(c_white);
 draw_text_border(300,200,"Best Time: "+time_string(map_info[3,sel]));
 draw_set_color(c_yellow);
 draw_text_border(300,210,"Dev Time: "+time_string(map_info[4,sel]));

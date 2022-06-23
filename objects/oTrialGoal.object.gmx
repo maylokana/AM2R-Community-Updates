@@ -52,7 +52,6 @@
 mus_stop(oMusicV2.currentbgm);
 oTrialLogic.timer_started = -1;
 global.end_time = oTrialLogic.timer;
-oTrialLogic.alarm[1] = 90;
 instance_destroy(); // done with this object so make it not exist
 </string>
           </argument>

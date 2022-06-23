@@ -250,6 +250,8 @@ draw_sprite(sGUIPBomb, 1, xoff + 1, 4);
 }
 }
 
+//input_display(10,225);
+
 if (global.ophudshowmap && global.ophudshowmetrcount) {
 //draw_background(bgGUIMap, 250 + widescreen_space, 0);
 xoff = 250;

@@ -33,10 +33,7 @@ if (global.mapmarker) {
 */
 draw_set_font(fontGUI2Default);
 // clock
-draw_set_color(c_gray);
-if (oTrialLogic.timer_started == 1) then draw_set_color(c_white);
-draw_set_halign(fa_right);
-draw_text_border(argument0+5,argument1+3,time_string(oTrialLogic.timer));
+draw_timer(argument0,argument1);
 // speedometer
 draw_set_color(c_white);
 draw_set_halign(fa_right);

@@ -60,8 +60,8 @@ mus_change(musArea1A);</code>
     <instance objName="oWallfire" x="360" y="80" name="inst_108208" locked="0" code="&#xA;facing = 1;&#xA;timer = 120;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWallfire" x="360" y="128" name="inst_108209" locked="0" code="&#xA;facing = 1;&#xA;timer = 90;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWallfire" x="280" y="80" name="inst_108210" locked="0" code="&#xA;facing = -1;&#xA;timer = 60;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oWallfire" x="216" y="128" name="inst_108211" locked="0" code="&#xA;facing = 1;&#xA;timer = 150;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oWallfire" x="392" y="176" name="inst_108212" locked="0" code="&#xA;facing = -1;&#xA;timer = 80;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWallfire" x="216" y="128" name="inst_108211" locked="0" code="facing = 1;&#xA;timer = 150;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWallfire" x="392" y="176" name="inst_108212" locked="0" code="facing = -1;&#xA;timer = 80;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oGotoRoom" x="640" y="160" name="inst_108213" locked="0" code="&#xA;targetroom = rm_a1a02;&#xA;targetx = 16;&#xA;targety = 640;&#xA;height = 80;&#xA;direction = 0;&#xA;camstartx = 16;&#xA;camstarty = 640;&#xA;transitionx = 4;&#xA;transitiony = 160;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oFadeTiles" x="128" y="192" name="inst_108214" locked="0" code="&#xA;areax = 560;&#xA;areay = 32;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oGotoRoom" x="0" y="160" name="inst_108215" locked="0" code="&#xA;targetroom = rm_a1a04;&#xA;targetx = 304;&#xA;targety = 160;&#xA;height = 80;&#xA;direction = 180;&#xA;camstartx = 304;&#xA;camstarty = 160;&#xA;transitionx = 316;&#xA;transitiony = 160;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

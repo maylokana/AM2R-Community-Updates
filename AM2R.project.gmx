@@ -1287,6 +1287,7 @@
       <sound>sound\musGenesis</sound>
       <sound>sound\musTrialsMenu</sound>
       <sound>sound\musTrialsWin</sound>
+      <sound>sound\musTrialsPlay</sound>
     </sounds>
     <sounds name="A4">
       <sound>sound\sndA4AlarmLoop</sound>
@@ -3396,6 +3397,9 @@
     <sprites name="TimeTrial">
       <sprite>sprites\sTTButton43</sprite>
       <sprite>sprites\sTTButton169</sprite>
+      <sprite>sprites\sEditorCursor</sprite>
+      <sprite>sprites\sEditorTab</sprite>
+      <sprite>sprites\sEditorStart</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -4340,10 +4344,16 @@
     <scripts name="TimeTrial">
       <script>scripts\cursor_blinking.gml</script>
       <script>scripts\time_string.gml</script>
+      <script>scripts\time_string_ms.gml</script>
+      <script>scripts\time_string_misc.gml</script>
       <script>scripts\set_map_info.gml</script>
       <script>scripts\start_trial.gml</script>
       <script>scripts\goal_trial.gml</script>
       <script>scripts\draw_timer.gml</script>
+      <script>scripts\difficulty_string.gml</script>
+      <script>scripts\input_display.gml</script>
+      <script>scripts\get_obj_count.gml</script>
+      <script>scripts\trials_check_save.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5403,6 +5413,10 @@
       <object>objects\oTTMissile</object>
       <object>objects\oTTSuper</object>
       <object>objects\oSkipMain</object>
+      <object>objects\oTrialEditor</object>
+      <object>objects\oEditorCamera</object>
+      <object>objects\oEditorSolid</object>
+      <object>objects\oEditorTab</object>
     </objects>
   </objects>
   <timelines name="timelines">
@@ -5830,9 +5844,12 @@
     <rooms name="TimeTrial">
       <room>rooms\trialselectroom</room>
       <room>rooms\trialclearroom</room>
+      <room>rooms\trialeditor</room>
       <rooms name="Ingame">
+        <room>rooms\empty_room</room>
         <room>rooms\map0</room>
         <room>rooms\map1</room>
+        <room>rooms\the_tower</room>
       </rooms>
     </rooms>
   </rooms>

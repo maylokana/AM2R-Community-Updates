@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,9 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>oControl.ingame = 0;
-sfx_stop_all();
-mus_change(musTrialsWin);
+            <string>global.trialsurface = 0; /* i don't know how to work surfaces so i gave up
+enjoy this global var :cry: */
+instance_create(160,120,oEditorCamera);
+
+cursor_active = 1;
+placed_objs = 0;
+
+trial_tab_bottom = instance_create(160,225,oEditorTab);
 </string>
           </argument>
         </arguments>
@@ -50,10 +55,68 @@ mus_change(musTrialsWin);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oControl.kMenu1Pressed){
-audio_stop_all();
-sfx_play(sndMenuMove);
-room_change(trialselectroom,0);
+            <string>// this is some temporary code to test clicking on specific areas
+if (cursor_active){
+if (mouse_check_button(mb_left)){
+   var xx = floor(mouse_x/16)*16;
+   var yy = floor(mouse_y/16)*16;
+   with (oEditorSolid){ // a check to deny further placement of solids on top of each other
+        if (x == xx &amp;&amp; y == yy){
+           instance_destroy(); // if check confirms, turn the old one into dust
+           // this probably isn't efficient but i do not care
+        }
+   }
+   instance_create(xx,yy,oEditorSolid);
+   placed_objs = get_obj_count();
+}
+
+if (mouse_check_button(mb_right)){
+   with (oEditorSolid){
+        if (position_meeting(mouse_x,mouse_y,self)){
+        instance_destroy();
+        }
+   }
+   placed_objs = get_obj_count();
+}
+}
+
+with (trial_tab_bottom){
+     if (position_meeting(mouse_x,mouse_y,self)){
+        offset = 30;
+        other.cursor_active = 0;
+     }else{
+           offset = 0;
+           other.cursor_active = 1;
+     }
+     smoothset += (offset-smoothset)/5;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="72">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var cx = view_xview[0];
+var cy = view_yview[0];
+with (trial_tab_bottom){
+     x = 160+cx;
+     y = (225-smoothset)+cy;
 }
 </string>
           </argument>
@@ -77,18 +140,29 @@ room_change(trialselectroom,0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// set up
-draw_set_color(c_white);
+            <string>// surfaces are lame. you know what isn't lame?
+var cx = view_xview[0];
+var cy = view_yview[0];
+// spaghetti code from gms2 :)
+/* debug code, no longer necessary
 draw_set_font(fontGUI2Default);
+draw_set_color(c_white);
 draw_set_halign(fa_center);
+draw_text_border(120+cx,220+cy,"X: "+string(mouse_x));
+draw_text_border(160+cx,220+cy,"Y: "+string(mouse_y));
+draw_text_border(200+cx,220+cy,"CA: "+string(cursor_active));
+*/
+// a forecast of the current object to be placed
+if (cursor_active){
+var snap = 16;
+var xx = floor(mouse_x/snap)*snap;
+var yy = floor(mouse_y/snap)*snap;
+draw_sprite_ext(sSolid,0,xx,yy,1,1,0,c_white,0.3);
+}
 
-// text
-draw_text_border(160,50,"good job beating the course#
-right now there isn't a proper clear#
-screen so ignore this for now##
-press your 'accept' menu button to#
-go back to the main menu#
-your time was "+time_string(global.end_time));
+// the cursor too
+draw_set_alpha(1);
+draw_sprite(sEditorCursor,0,mouse_x,mouse_y);
 </string>
           </argument>
         </arguments>
