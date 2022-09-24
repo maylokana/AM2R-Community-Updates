@@ -32,6 +32,137 @@ alarm[0] = 1; // alarm for spawning samus
 // variables
 timer_started = 0;
 timer = 0; // in tics
+
+// GENERATING THE LEVEL
+// grid for making visuals later
+var grid = ds_grid_create(200,150);
+// open the file yoinked from global.level_is
+var file = file_text_open_read("stages/"+global.level_is);
+// skip the strings, they aren't important
+repeat (4){
+    file_text_readln(file);
+}
+
+// objs
+while (!file_text_eof(file)){
+    var xx = file_text_read_real(file);
+    file_text_readln(file);
+    var yy = file_text_read_real(file);
+    file_text_readln(file);
+    var ty = file_text_read_real(file);
+    file_text_readln(file);
+    switch (ty){
+        case 0: // normal solid
+            instance_create(xx,yy,oSolid1);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
+        break;
+        case 1: // slope 1
+            instance_create(xx,yy,oSlope1);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),2);
+        break;
+        case 2: // slope 2
+            instance_create(xx,yy,oSlope2);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),3);
+        break;
+        case 3: // crack block
+            instance_create(xx,yy,oBlockStep);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 4: // beamblock
+            instance_create(xx,yy,oBlockShoot);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 5: // bombblock
+            instance_create(xx,yy,oBlockBomb);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 6: // missileblock
+            instance_create(xx,yy,oBlockMissile);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 7: // superblock
+            instance_create(xx,yy,oBlockSMissile);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 8: // pbombblock
+            instance_create(xx,yy,oBlockPBomb);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 9: // screwblock
+            instance_create(xx,yy,oBlockScrew);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 10: // speedblock
+            instance_create(xx,yy,oBlockSpeed);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 11: // spawn. also for filling grid
+            x = xx+8;
+            y = yy+16;
+            var s_x = x;
+            var s_y = y-8;
+        break;
+        case 12: // FREEDOM
+            instance_create(xx,yy,oTrialGoal);
+        break;
+        case 13: // spikes
+            instance_create(xx,yy,oSpikes2);
+        break;
+        // items
+        case 14: // spiderball
+            //instance_create(xx,yy+16,oTTSpider);
+        break;
+        case 15: // jumpball
+            instance_create(xx,yy+16,oTTSpring);
+        break;
+        case 16: // hijump
+            instance_create(xx,yy+16,oTTHijump);
+        break;
+        case 17: // spacejump
+            //instance_create(xx,yy+16,oSpikes2);
+        break;
+        case 18: // bombs
+            instance_create(xx,yy+16,oTTBomb);
+        break;
+        case 19: // missile
+            instance_create(xx,yy+16,oTTMissile);
+        break;
+        case 20: // super
+            instance_create(xx,yy+16,oTTSuper);
+        break;
+        case 21: // power
+            //instance_create(xx,yy+16,oSpikes2);
+        break;
+        case 22: // screw
+            instance_create(xx,yy+16,oTTScrew);
+        break;
+        case 23: // speed
+            instance_create(xx,yy+16,oTTBooster);
+        break;
+    }
+}
+
+// now make visuals off of the grid
+for (var i = 0; i &lt; 200; ++i;){
+    for (var v = 0; v &lt; 150; ++v;){
+        switch (ds_grid_get(grid,i,v)){
+            case 1:
+                tile_add(tlArea1A,0,0,16,16,i*16,v*16,-100);
+            break;
+            case 2:
+                tile_add(tlArea1A,0,224,16,16,i*16,v*16,-100);
+            break;
+            case 3:
+                tile_add(tlArea1A,16,224,16,16,i*16,v*16,-100);
+            break;
+            case 4:
+                tile_add(tlArea1A,112,352,16,16,i*16,v*16,-122);
+            break;
+        }
+    }
+}
+// kill the grid because memory leaks are bad
+ds_grid_destroy(grid);
 </string>
           </argument>
         </arguments>

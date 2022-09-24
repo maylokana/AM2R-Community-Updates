@@ -10,7 +10,13 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>global.skip_mMenu = 0;</code>
+  <code>global.skip_mMenu = 0;
+
+window_set_caption("AM2R: Time Trials");
+/*
+i genuinely have no idea why this resets to
+"made in GMS" even though i set it otherwise but.. this will fix it
+*/</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>0</clearDisplayBuffer>

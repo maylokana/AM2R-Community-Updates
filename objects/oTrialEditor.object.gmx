@@ -28,11 +28,46 @@
             <string>global.trialsurface = 0; /* i don't know how to work surfaces so i gave up
 enjoy this global var :cry: */
 instance_create(160,120,oEditorCamera);
+instance_create(0,0,oEditorHelp);
 
 cursor_active = 1;
 placed_objs = 0;
 
 trial_tab_bottom = instance_create(160,225,oEditorTab);
+
+solid_place = 0;
+// 0 - normal solid
+// 1 - right slope
+// 2 - left slope
+// 3 - slipthrough solid
+// 4 - breakable solid (beam)
+// 5 - breakable solid (bomb)
+// 6 - breakable solid (missile)
+// 7 - breakable solid (soup)
+// 8 - breakable solid (powbomb)
+// 9 - breakable solid (screw)
+// 10 - breakable solid (speed)
+// 11 - samus spawn
+// 12 - exit solid
+// 13 - spikes
+// 14 - spiderball
+// 15 - jumpball
+// 16 - hijump
+// 17 - spacejump
+// 18 - bomb
+// 19 - 5 missiles
+// 20 - 2 soups
+// 21 - 2 powas
+// 22 - screwattack
+// 23 - speedbooster
+
+relay_button = -1;
+
+stage_name = "Untitled Level";
+stage_auth = "Anonymous";
+stage_id = generate_id();
+
+lockout = 0; // mouse garbage idk
 </string>
           </argument>
         </arguments>
@@ -58,16 +93,26 @@ trial_tab_bottom = instance_create(160,225,oEditorTab);
             <string>// this is some temporary code to test clicking on specific areas
 if (cursor_active){
 if (mouse_check_button(mb_left)){
+   if (!lockout){ // can't place if lockout exists
    var xx = floor(mouse_x/16)*16;
    var yy = floor(mouse_y/16)*16;
-   with (oEditorSolid){ // a check to deny further placement of solids on top of each other
-        if (x == xx &amp;&amp; y == yy){
+   var no_multi = 0;
+   if (solid_place == 11 || solid_place == 14 || solid_place == 15 || solid_place == 16 || solid_place == 17 || solid_place == 18 || solid_place == 22 || solid_place == 23){
+        no_multi = 1;
+   }
+   with (oEditorSolid){ // a check to deny further placement of solids on top of each other OR if attempting to place multiple spawns
+        if ((x == xx &amp;&amp; y == yy) || (no_multi &amp;&amp; solid_style == other.solid_place)){
            instance_destroy(); // if check confirms, turn the old one into dust
            // this probably isn't efficient but i do not care
         }
    }
-   instance_create(xx,yy,oEditorSolid);
+   with (instance_create(xx,yy,oEditorSolid)){
+        solid_style = other.solid_place;
+   }
    placed_objs = get_obj_count();
+   }
+}else{
+    lockout = 0;
 }
 
 if (mouse_check_button(mb_right)){
@@ -81,8 +126,8 @@ if (mouse_check_button(mb_right)){
 }
 
 with (trial_tab_bottom){
-     if (position_meeting(mouse_x,mouse_y,self)){
-        offset = 30;
+     if (position_meeting(mouse_x,mouse_y,self) &amp;&amp; (!instance_exists(oEditorInfo)) &amp;&amp; (!instance_exists(oEditorHelp))){
+        offset = 58;
         other.cursor_active = 0;
      }else{
            offset = 0;
@@ -90,6 +135,177 @@ with (trial_tab_bottom){
      }
      smoothset += (offset-smoothset)/5;
 }
+if (instance_exists(oEditorInfo)) then cursor_active = -1;
+
+if (relay_button &gt; -1){
+    switch (relay_button){
+        case 0:
+           instance_create(0+view_xview[0],0+view_yview[0],oEditorInfo);
+        break;
+        case 1:
+            // save level (there's a script for that)
+            editor_save();
+        break;
+        case 2:
+            // load level (there's a script for that)
+            editor_load();
+        break;
+        case 3:
+            // go away
+            room_change(trialselectroom,0);
+        break;
+        case 4:
+            // player spawn
+            editor_message("Selected Player Spawn");
+            solid_place = 11;
+        break;
+        case 5:
+            // normal solid
+            editor_message("Selected Solid");
+            solid_place = 0;
+        break;
+        case 6:
+            // normal going upright
+            editor_message("Selected Right Slope");
+            solid_place = 1;
+        break;
+        case 7:
+            // slope going upleft
+            editor_message("Selected Left Slope");
+            solid_place = 2;
+        break;
+        case 8:
+            // crumble solid
+            editor_message("Selected Crumble Solid");
+            solid_place = 3;
+        break;
+        case 9:
+            // beam block
+            editor_message("Selected Breakable Block");
+            solid_place = 4;
+        break;
+        case 10:
+            // bomb block
+            editor_message("Selected Bomb Block");
+            solid_place = 5;
+        break;
+        case 11:
+            // mibble block
+            editor_message("Selected Missile Block");
+            solid_place = 6;
+        break;
+        case 12:
+            // soup block
+            editor_message("Selected Super Missile Block");
+            solid_place = 7;
+        break;
+        case 13:
+            // powa block
+            editor_message("Selected Power Bomb Block");
+            solid_place = 8;
+        break;
+        case 14:
+            // screw block
+            editor_message("Selected Screw Attack Block");
+            solid_place = 9;
+        break;
+        case 15:
+            // speed block
+            editor_message("Selected Speed Booster Block");
+            solid_place = 10;
+        break;
+        case 16:
+            // exit area
+            editor_message("Selected Exit Zone");
+            solid_place = 12;
+        break;
+        case 17:
+            // spikes/hazards
+            editor_message("Selected Hazard");
+            solid_place = 13;
+        break;
+        case 18:
+            // spiderball
+            editor_message("Selected Spider Ball");
+            solid_place = 14;
+        break;
+        case 19:
+            // jumpball
+            editor_message("Selected Spring Ball");
+            solid_place = 15;
+        break;
+        case 20:
+            // hijump
+            editor_message("Selected Hi-jump");
+            solid_place = 16;
+        break;
+        case 21:
+            // spacejump
+            editor_message("Selected Space Jump");
+            solid_place = 17;
+        break;
+        case 22:
+            // bomb
+            editor_message("Selected Bombs");
+            solid_place = 18;
+        break;
+        case 23:
+            // mibble
+            editor_message("Selected five Missiles");
+            solid_place = 19;
+        break;
+        case 24:
+            // soup mibble
+            editor_message("Selected two Super Missiles");
+            solid_place = 20;
+        break;
+        case 25:
+            // powa bomb
+            editor_message("Selected two Power Bombs");
+            solid_place = 21;
+        break;
+        case 26:
+            // screwattack
+            editor_message("Selected Screw Attack");
+            solid_place = 22;
+        break;
+        case 27:
+            // speedbooster
+            editor_message("Selected Speed Booster");
+            solid_place = 23;
+        break;
+        default:
+            // not much to say so fun fact! smart tab is terrible
+            editor_message("Relayed message "+string(relay_button)+".");
+        break;
+    }
+    relay_button = -1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// the cursor
+draw_set_alpha(1);
+draw_sprite(sEditorCursor,0,mouse_x,mouse_y);
 </string>
           </argument>
         </arguments>
@@ -157,12 +373,21 @@ if (cursor_active){
 var snap = 16;
 var xx = floor(mouse_x/snap)*snap;
 var yy = floor(mouse_y/snap)*snap;
-draw_sprite_ext(sSolid,0,xx,yy,1,1,0,c_white,0.3);
+    switch (solid_place){
+    default:
+           draw_sprite_ext(sSolid,0,xx+0,yy+0,1,1,0,c_white,0.3);
+    break;
+    case 1:
+           draw_sprite_ext(sSlope1,0,xx+0,yy+0,1,1,0,c_white,0.3);
+    break;
+    case 2:
+           draw_sprite_ext(sSlope2,0,xx+0,yy+0,1,1,0,c_white,0.3);
+    break;
+    case 11:
+           draw_sprite_ext(sEditorStart,0,xx+8,yy+16,1,1,0,c_black,0.3);
+    break;
+    }
 }
-
-// the cursor too
-draw_set_alpha(1);
-draw_sprite(sEditorCursor,0,mouse_x,mouse_y);
 </string>
           </argument>
         </arguments>

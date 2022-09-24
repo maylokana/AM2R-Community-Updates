@@ -343,6 +343,10 @@ if (instance_exists(empspark)) {
         empspark.y = y + aspr2y;
     }
 }
+// kill player if they go out of bounds
+if (y &gt; room_height+64){
+    damage_player(50000,0,0,true,true);
+}
 </string>
           </argument>
         </arguments>

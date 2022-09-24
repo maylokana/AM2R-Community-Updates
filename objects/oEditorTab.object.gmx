@@ -3,7 +3,7 @@
   <spriteName>sEditorTab</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -31,6 +31,39 @@ smoothset = 0;
 message_string = "Welcome to the AM2Rials editor!";
 if (oControl.widescreen == 0) message_string = "It appears you are using 4:3. Switch to 16:9 for a better experience!";
 message_tick = 300;
+
+// data buttons
+create_button(3-185,22,50,12,0,"Info",0,c_fuchsia);
+create_button(3-185,36,50,12,1,"Save",0,c_lime);
+create_button(3-185,50,50,12,2,"Load",0,c_aqua);
+create_button(3-185,64,50,12,3,"Exit",0,c_red);
+
+// obj buttons
+create_button(3-140,29,24,24,4,"",sEditorStartIcon,c_white);
+create_button(3-110,29,24,24,5,"",sSolid,c_white);
+create_button(3-80,29,24,24,6,"",sSlope1,c_white);
+create_button(3-50,29,24,24,7,"",sSlope2,c_white);
+create_button(3-20,29,24,24,8,"",sBlockStep,c_white);
+create_button(3+10,29,24,24,9,"",sBlockShoot,c_white);
+create_button(3+40,29,24,24,10,"",sBlockBomb,c_white);
+create_button(3+70,29,24,24,11,"",sBlockMissile,c_white);
+create_button(3+100,29,24,24,12,"",sBlockSMissile,c_white);
+create_button(3+130,29,24,24,13,"",sBlockPBomb,c_white);
+create_button(3+160,29,24,24,14,"",sBlockScrew,c_white);
+create_button(3+190,29,24,24,15,"",sBlockSpeed,c_white);
+// row 2
+create_button(3-140,57,24,24,16,"",sEDTrigger,c_white); // end tiles
+create_button(3-110,57,24,24,17,"",sEDSpike,c_white); // spike tiles
+create_button(3-80,57,24,24,18,"",sItemSpiderBall,c_white);
+create_button(3-50,57,24,24,19,"",sItemJumpBall,c_white);
+create_button(3-20,57,24,24,20,"",sItemHijump,c_white);
+create_button(3+10,57,24,24,21,"",sItemSpaceJump,c_white);
+create_button(3+40,57,24,24,22,"",sItemBomb,c_white);
+create_button(3+70,57,24,24,23,"",sItemMissile,c_white);
+create_button(3+100,57,24,24,24,"",sItemSuperMissile,c_white);
+create_button(3+130,57,24,24,25,"",sItemPowerBomb,c_white);
+create_button(3+160,57,24,24,26,"",sItemScrewAttack,c_white);
+create_button(3+190,57,24,24,27,"",sItemSpeedBooster,c_white);
 </string>
           </argument>
         </arguments>
@@ -78,11 +111,12 @@ message_tick = 300;
             <kind>1</kind>
             <string>draw_self(); // lol
 // info on the current stage
+draw_set_valign(fa_top);
 draw_set_alpha(1);
 draw_set_color(c_white);
 draw_set_font(fontMenuSmall2Default);
 draw_set_halign(fa_right);
-draw_text_border(x-45,y-1,"Untitled Stage"); // stage name
+draw_text_border(x-45,y-1,oTrialEditor.stage_name); // stage name
 draw_text_border(x+(158+(oControl.widescreen*45)),y-1,"X: "+string(mouse_x)+" / Y: "+string(mouse_y)); // mouse x/y
 draw_set_halign(fa_left);
 draw_text_border(x+45,y-1,"OBJs: "+string(oTrialEditor.placed_objs)); // objects placed
@@ -90,6 +124,7 @@ draw_set_font(fontMenuTinyDefault);
 draw_set_halign(fa_center);
 draw_set_alpha(message_tick/50);
 draw_text_border(x,y-16,message_string); // notification text
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

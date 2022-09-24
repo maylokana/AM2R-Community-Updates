@@ -7,7 +7,106 @@
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// i'm so sorry for your frames
+switch (solid_style){
+    default:
+        draw_self();
+    break;
+    case 1:
+        draw_sprite(sSlope1,0,x,y);
+    break;
+    case 2:
+        draw_sprite(sSlope2,0,x,y);
+    break;
+    case 3:
+        draw_sprite(sBlockStep,0,x,y);
+    break;
+    case 4:
+        draw_sprite(sBlockShoot,0,x,y);
+    break;
+    case 5:
+        draw_sprite(sBlockBomb,0,x,y);
+    break;
+    case 6:
+        draw_sprite(sBlockMissile,0,x,y);
+    break;
+    case 7:
+        draw_sprite(sBlockSMissile,0,x,y);
+    break;
+    case 8:
+        draw_sprite(sBlockPBomb,0,x,y);
+    break;
+    case 9:
+        draw_sprite(sBlockScrew,0,x,y);
+    break;
+    case 10:
+        draw_sprite(sBlockSpeed,0,x,y);
+    break;
+    case 11:
+        draw_sprite(sEditorStart,0,x+8,y+16);
+    break;
+    case 12:
+        draw_sprite(sEDTrigger,0,x,y);
+    break;
+    case 13:
+        draw_sprite(sEDSpike,0,x,y);
+    break;
+    // items
+    case 14:
+        draw_sprite(sItemSpiderBall,0,x+0,y+16);
+    break;
+    case 15:
+        draw_sprite(sItemJumpBall,0,x+0,y+16);
+    break;
+    case 16:
+        draw_sprite(sItemHijump,0,x+0,y+16);
+    break;
+    case 17:
+        draw_sprite(sItemSpaceJump,0,x+0,y+16);
+    break;
+    case 18:
+        draw_sprite(sItemBomb,0,x+0,y+16);
+    break;
+    case 19:
+        draw_sprite(sItemMissile,0,x+0,y+16);
+    break;
+    case 20:
+        draw_sprite(sItemSuperMissile,0,x+0,y+16);
+    break;
+    case 21:
+        draw_sprite(sItemPowerBomb,0,x+0,y+16);
+    break;
+    case 22:
+        draw_sprite(sItemScrewAttack,0,x+0,y+16);
+    break;
+    case 23:
+        draw_sprite(sItemSpeedBooster,0,x+0,y+16);
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

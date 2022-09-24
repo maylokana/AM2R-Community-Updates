@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-99</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,10 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>oControl.ingame = 0;
-sfx_stop_all();
-sfx_play(sndMessage);
-mus_change(musTrialsWin);
+            <string>// yes this is a copy of oEditrButton no i didn't use a parent why are you asking?
+/* be sure to set these variables manually in a with or something or else
+this won't work.. and we sure don't need more spaghetti like THAT
+button_width = 40; divides this number by 2 in draw
+button_height = 10; also divides this by 2 in draw
+button_x = 0; uses this to link to oEditorTab properly (0 = middle)
+button_y = 0; uses this to link to oEditorTab properly (0 = top)
+button_flag = -1; determines what oEditorTab will recieve and likewise send to oTrialEditor
+button_string = "String"; says a funny
+button_sprite = -1; shows a funny (only if button_string isn't filled)
+button_border = c_white; button border color. amazing
+below are included vars. don't bother setting them yourself*/
+button_alpha = 1; // rises in value initially for a nice little fade in effect
+button_highlight = 0;
 </string>
           </argument>
         </arguments>
@@ -51,17 +61,22 @@ mus_change(musTrialsWin);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oControl.kMenu1Pressed){
-audio_stop_all();
-sfx_play(sndMenuMove);
-room_change(trialselectroom,0);
+            <string>// highlight code
+if (mouse_x &gt; x-(button_width/2) &amp;&amp; mouse_x &lt; x+(button_width/2) &amp;&amp; mouse_y &gt; y-(button_height/2) &amp;&amp; mouse_y &lt; y+(button_height/2) &amp;&amp; oEditorInfo.type_mode == -1){ // still ew, but... no, no "buts." this is ew.
+    button_highlight = 1;
+    if (mouse_check_button_pressed(mb_left)){
+        oEditorInfo.relay_button = button_flag;
+        sfx_play(sndMenuSel);
+    }
+}else{
+    button_highlight = 0;
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="73">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -78,21 +93,36 @@ room_change(trialselectroom,0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(1);
-draw_sprite(global.frame,0,-(oControl.widescreen*53),0); // test
+            <string>// move x/y
+x = oEditorInfo.x+button_x;
+y = oEditorInfo.y+button_y;
 
-// set up
+// everything is drawn from the center
+var round_x = round(x);
+var round_y = round(y);
+draw_set_color(button_border);
+// the contents
+// the box
+draw_set_alpha(1);
+draw_rectangle(round_x-(button_width/2),round_y-(button_height/2),round_x+(button_width/2),round_y+(button_height/2),true);
+// the contents
+if (button_string == ""){ // sprite
+var sw = sprite_get_width(button_sprite);
+var sh = sprite_get_height(button_sprite);
+draw_sprite_part(button_sprite,0,0,0,sw,sh,(0-(sw/2))+round_x,(0-(sh/2))+round_y); // this is a really dumb way of forcing the sprite to the middle
+}else{ // string
+draw_set_font(fontMenuTinyDefault);
 draw_set_color(c_white);
-draw_set_font(fontGUI2Default);
 draw_set_halign(fa_center);
-
-// text
-draw_text_border(160,50,"good job beating the course#
-right now there isn't a proper clear#
-screen so ignore this for now##
-press your 'accept' menu button to#
-go back to the main menu#
-your time was "+time_string(global.end_time));
+draw_set_valign(fa_center);
+draw_text(round_x+1,round_y-1,button_string);
+}
+// box hlight
+if (button_highlight){
+    draw_set_alpha(0.3);
+    draw_set_color(button_border);
+    draw_rectangle(round_x-(button_width/2),round_y-(button_height/2),round_x+(button_width/2),round_y+(button_height/2),false);
+}
 </string>
           </argument>
         </arguments>

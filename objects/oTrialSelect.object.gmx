@@ -29,6 +29,7 @@
 it's probably not an optimal way of having a menu
 i'll live my life how i want to */
 
+draw_set_valign(fa_top);
 audio_stop_sound(musTitle); // a fix so that the og main menu theme stops playing
 
 scroll_x = 0; // background scrolling
@@ -44,6 +45,24 @@ active = 1; // whether the menus are active
 cat = 0; // category
 sel = 0; // (cursor) selection
 
+// custom levels
+custom_levels = 0;
+// set up folders if they're not there
+if (!directory_exists("stages/")){
+    directory_create("stages/");
+}else{ // otherwise, dig in
+    var file = file_find_first("stages/*.am2rials",0);
+    if (file != ""){ // stages do exist!
+        get_stage_data(file);
+        var file = file_find_next();
+        while (file != ""){
+            get_stage_data(file);
+            var file = file_find_next();
+        }
+    }
+}
+
+// genuinely don't worry about any of this..
 // course select variables
 map_scroll = 0; // the course select scroll
 real_scroll = 0; // the "real" scroll variable
@@ -186,8 +205,11 @@ if (oControl.kMenu1Pressed){
    sfx_play(sndMenuSel);
    switch (sel){
    case 0:
+   /*
    cat = 1;
    map_scroll = real_scroll;
+   */
+    cat = 2;
    break;
    case 1:
    room_change(trialeditor,0);
@@ -224,6 +246,28 @@ if (oControl.kMenu2Pressed){
    sel = 0;
 }
 break;
+case 2:
+    if (oControl.kDown &amp;&amp; oControl.kDownPushedSteps == 0){
+        sfx_play(sndMenuMove);
+        ++sel;
+    }
+    if (oControl.kUp &amp;&amp; oControl.kUpPushedSteps == 0){
+        sfx_play(sndMenuMove);
+        --sel;
+    }
+    if (sel &gt; custom_levels-1) then sel = 0;
+    if (sel &lt; 0) then sel = custom_levels-1;
+    if (oControl.kMenu1Pressed){
+        sfx_play(sndMenuSel);
+        global.level_is = custom_level_file[sel];
+        start_trial();
+    }
+    if (oControl.kMenu2Pressed){
+        sfx_play(sndMenuCancel);
+        cat = 0;
+        sel = 0;
+    }
+break;
 }
 }
 // flavor_textinator
@@ -235,7 +279,7 @@ case 0:
             flavor_text = "Select a course and attempt to set a best time.";
             break;
             case 1:
-            flavor_text = "Play a tutorial on a specific ability.";
+            flavor_text = "Create your own levels with the level editor.";
             break;
             case 2:
             flavor_text = "Access AM2R's settings to tweak gameplay options.";
@@ -337,7 +381,7 @@ cursor_blinking(sel,3);
 draw_sprite_ext(sTTButton43,3,cx+75,cy+72,1,1,0,draw_get_color(),1);
 }
 break;
-case 1: // course select
+case 1: // course select (defunct)
 for (var r1 = 0; r1 &lt; available_maps; ++r1){
 draw_set_font(fontGUI2Default);
 cursor_blinking(sel,r1);
@@ -354,16 +398,32 @@ draw_text_border(300,200,"Best Time: "+time_string(map_info[3,sel]));
 draw_set_color(c_yellow);
 draw_text_border(300,210,"Dev Time: "+time_string(map_info[4,sel]));
 break;
+case 2: // new course select
+    draw_set_halign(fa_center);
+    draw_set_color(c_white);
+    draw_text_border(160,30,string(custom_levels)+" levels found");
+    if (custom_levels){
+        for (var i = 0; i &lt; custom_levels; ++i;){
+            if (sel == i){
+                draw_text_border(160,60+(i*10),"&gt; "+custom_level_name[i]+" by "+custom_level_auth[i]+" &lt;");
+            }else{
+                draw_text_border(160,60+(i*10),custom_level_name[i]+" by "+custom_level_auth[i]);
+            }
+        }
+    }else{
+        draw_text_border(160,60+(i*10),"Levels can be");
+    }
+break;
 }
 
 // lower bar
 if (!flavor_text == ""){
-draw_set_color(c_black);
-draw_rectangle(-100,230,420,240,false);
-draw_set_color(c_white);
-draw_set_halign(fa_center);
-draw_set_font(fontMenuSmallDefault);
-draw_text(160,228,flavor_text);
+    draw_set_color(c_black);
+    draw_rectangle(-100,230,420,240,false);
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_set_font(fontMenuSmallDefault);
+    draw_text(160,228,flavor_text);
 }
 </string>
           </argument>

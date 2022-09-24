@@ -1405,6 +1405,10 @@
       <sound>sound\sndSkorpBlade</sound>
       <sound>sound\sndYumboDash</sound>
     </sounds>
+    <sounds name="TimeTrials">
+      <sound>sound\sItemSelect</sound>
+      <sound>sound\sItemPlace</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="Pickups">
@@ -3400,6 +3404,8 @@
       <sprite>sprites\sEditorCursor</sprite>
       <sprite>sprites\sEditorTab</sprite>
       <sprite>sprites\sEditorStart</sprite>
+      <sprite>sprites\sEditorStartIcon</sprite>
+      <sprite>sprites\sGoal</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -4354,6 +4360,13 @@
       <script>scripts\input_display.gml</script>
       <script>scripts\get_obj_count.gml</script>
       <script>scripts\trials_check_save.gml</script>
+      <script>scripts\create_button.gml</script>
+      <script>scripts\create_button_alt.gml</script>
+      <script>scripts\editor_message.gml</script>
+      <script>scripts\editor_save.gml</script>
+      <script>scripts\editor_load.gml</script>
+      <script>scripts\generate_id.gml</script>
+      <script>scripts\get_stage_data.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5406,6 +5419,7 @@
       <object>objects\oTrialLogic</object>
       <object>objects\oTrialAutoad</object>
       <object>objects\oTTBooster</object>
+      <object>objects\oTTScrew</object>
       <object>objects\oTTHijump</object>
       <object>objects\oTTPGrip</object>
       <object>objects\oTTBomb</object>
@@ -5417,6 +5431,10 @@
       <object>objects\oEditorCamera</object>
       <object>objects\oEditorSolid</object>
       <object>objects\oEditorTab</object>
+      <object>objects\oEditorButton</object>
+      <object>objects\oInfoButton</object>
+      <object>objects\oEditorInfo</object>
+      <object>objects\oEditorHelp</object>
     </objects>
   </objects>
   <timelines name="timelines">
