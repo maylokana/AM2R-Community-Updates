@@ -24,6 +24,7 @@ file_text_write_string(file,stage_auth);
 file_text_writeln(file);
 file_text_write_string(file,stage_id);
 file_text_writeln(file);
+file_text_write_string(file,string(objs_hidden));
 file_text_writeln(file);
 
 // save all the objects. ALL. OF. THEM. and then pray it doesn't break

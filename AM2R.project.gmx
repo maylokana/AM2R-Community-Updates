@@ -5420,6 +5420,7 @@
     <objects name="TimeTrial">
       <object>objects\oTrialSelect</object>
       <object>objects\oTrialClear</object>
+      <object>objects\oTrialReset</object>
       <object>objects\oTrialGoal</object>
       <object>objects\oTrialLogic</object>
       <object>objects\oTrialAutoad</object>
@@ -5870,6 +5871,7 @@
     <rooms name="TimeTrial">
       <room>rooms\trialselectroom</room>
       <room>rooms\trialclearroom</room>
+      <room>rooms\trialresetroom</room>
       <room>rooms\trialeditor</room>
       <rooms name="Ingame">
         <room>rooms\empty_room</room>

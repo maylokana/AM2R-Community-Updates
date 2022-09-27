@@ -32,6 +32,7 @@ instance_create(0,0,oEditorHelp);
 
 cursor_active = 1;
 placed_objs = 0;
+objs_hidden = 1;
 
 trial_tab_bottom = instance_create(160,225,oEditorTab);
 

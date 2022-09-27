@@ -14,6 +14,12 @@ if (load != ""){
     file_text_readln(file);
     stage_id = file_text_read_string(file);
     file_text_readln(file);
+    var s = file_text_read_string(file);
+    if (s == ""){
+        objs_hidden = 1;
+    }else{
+        objs_hidden = real(s);
+    }
     file_text_readln(file);
 
     // objs

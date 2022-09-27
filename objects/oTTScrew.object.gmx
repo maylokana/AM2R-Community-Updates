@@ -49,6 +49,8 @@
           <argument>
             <kind>1</kind>
             <string>audio_stop_sound(sndMessage);
+audio_stop_sound(sndSpinJump);
+audio_stop_sound(sndSpaceJump);
 sfx_play(sndMessage);
 make_notification("New Item","Screw Attack Acquired",140,"","");
 global.screwattack = 1;

@@ -54,27 +54,27 @@ velocity_y = 0;
             <kind>1</kind>
             <string>// basic camera buttons
 if (keyboard_check(ord("A"))){
-   velocity_x -= 0.25;
+   velocity_x -= 1;
 }
 
 if (keyboard_check(ord("D"))){
-   velocity_x += 0.25;
+   velocity_x += 1;
 }
 
 if (keyboard_check(ord("W"))){
-   velocity_y -= 0.25;
+   velocity_y -= 1;
 }
 
 if (keyboard_check(ord("S"))){
-   velocity_y += 0.25;
+   velocity_y += 1;
 }
 
 if (!keyboard_check(ord("A")) &amp;&amp; !keyboard_check(ord("D"))){
    if !(velocity_x == 0){
       if (velocity_x &gt; 0){
-      velocity_x -= 0.25;
+      velocity_x -= 1;
       }else{
-      velocity_x += 0.25;
+      velocity_x += 1;
       }
    }
 }
@@ -82,9 +82,9 @@ if (!keyboard_check(ord("A")) &amp;&amp; !keyboard_check(ord("D"))){
 if (!keyboard_check(ord("W")) &amp;&amp; !keyboard_check(ord("S"))){
    if !(velocity_y == 0){
       if (velocity_y &gt; 0){
-      velocity_y -= 0.25;
+      velocity_y -= 1;
       }else{
-      velocity_y += 0.25;
+      velocity_y += 1;
       }
    }
 }
@@ -95,8 +95,10 @@ if ((instance_exists(oEditorInfo))){
 }
 
 // clamps
-velocity_x = clamp(velocity_x,-3,3);
-velocity_y = clamp(velocity_y,-3,3);
+var x_t = 3;
+if (keyboard_check(vk_shift)) then x_t = 9;
+velocity_x = clamp(velocity_x,-x_t,x_t);
+velocity_y = clamp(velocity_y,-x_t,x_t);
 
 // move the camera!
 x += velocity_x;
@@ -106,7 +108,7 @@ y += velocity_y;
 if (x &lt; 160) then x = 160;
 if (x &gt; room_width-160) then x = room_width-160;
 if (y &lt; 120) then y = 120;
-if (y &gt; room_height-120) then x = room_height-120;
+if (y &gt; room_height-120) then y = room_height-120;
 </string>
           </argument>
         </arguments>
