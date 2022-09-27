@@ -261,7 +261,7 @@ if (relay_button &gt; -1){
         break;
         case 25:
             // powa bomb
-            editor_message("Selected two Power Bombs");
+            editor_message("Selected one Power Bomb");
             solid_place = 21;
         break;
         case 26:

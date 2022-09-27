@@ -3406,6 +3406,7 @@
       <sprite>sprites\sEditorStart</sprite>
       <sprite>sprites\sEditorStartIcon</sprite>
       <sprite>sprites\sGoal</sprite>
+      <sprite>sprites\sGoalStrip</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -3803,6 +3804,10 @@
       <background>background\bgA0SkyTwilight_wide</background>
       <background>background\bgA0SkyNight_wide</background>
       <background>background\tlWidescreenBGs</background>
+    </backgrounds>
+    <backgrounds name="TimeTrial">
+      <background>background\bgTimeTrial</background>
+      <background>background\tlTimeTrial</background>
     </backgrounds>
   </backgrounds>
   <paths name="paths"/>
@@ -5420,11 +5425,14 @@
       <object>objects\oTrialAutoad</object>
       <object>objects\oTTBooster</object>
       <object>objects\oTTScrew</object>
+      <object>objects\oTTSpace</object>
       <object>objects\oTTHijump</object>
       <object>objects\oTTPGrip</object>
       <object>objects\oTTBomb</object>
       <object>objects\oTTSpring</object>
       <object>objects\oTTMissile</object>
+      <object>objects\oTTPower</object>
+      <object>objects\oTTSpider</object>
       <object>objects\oTTSuper</object>
       <object>objects\oSkipMain</object>
       <object>objects\oTrialEditor</object>

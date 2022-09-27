@@ -15,7 +15,7 @@ if (start_exists == 0){
 }
 
 // otherwise... let's crack into this egg
-var file = file_text_open_write("stages/"+stage_id+".am2rials");
+var file = file_text_open_write("stages/"+string_letters(stage_name)+" - "+stage_id+".am2rials");
 
 // name, author and id data
 file_text_write_string(file,stage_name);

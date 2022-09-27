@@ -247,20 +247,26 @@ if (oControl.kMenu2Pressed){
 }
 break;
 case 2:
-    if (oControl.kDown &amp;&amp; oControl.kDownPushedSteps == 0){
+    if (oControl.kDownPushedSteps == 1 || (oControl.kDownPushedSteps &gt;= 20 &amp;&amp; oControl.kDownPushedSteps mod 4 == 1)){
         sfx_play(sndMenuMove);
         ++sel;
     }
-    if (oControl.kUp &amp;&amp; oControl.kUpPushedSteps == 0){
+    if (oControl.kUpPushedSteps == 1 || (oControl.kUpPushedSteps &gt;= 20 &amp;&amp; oControl.kUpPushedSteps mod 4 == 1)){
         sfx_play(sndMenuMove);
         --sel;
     }
     if (sel &gt; custom_levels-1) then sel = 0;
     if (sel &lt; 0) then sel = custom_levels-1;
     if (oControl.kMenu1Pressed){
-        sfx_play(sndMenuSel);
-        global.level_is = custom_level_file[sel];
-        start_trial();
+        if (custom_levels == 0){
+            sfx_play(sndMenuCancel);
+            cat = 0;
+            sel = 0;
+        }else{
+            sfx_play(sndMenuSel);
+            global.level_is = custom_level_file[sel];
+            start_trial();
+        }
     }
     if (oControl.kMenu2Pressed){
         sfx_play(sndMenuCancel);
@@ -403,15 +409,29 @@ case 2: // new course select
     draw_set_color(c_white);
     draw_text_border(160,30,string(custom_levels)+" levels found");
     if (custom_levels){
-        for (var i = 0; i &lt; custom_levels; ++i;){
-            if (sel == i){
-                draw_text_border(160,60+(i*10),"&gt; "+custom_level_name[i]+" by "+custom_level_auth[i]+" &lt;");
-            }else{
-                draw_text_border(160,60+(i*10),custom_level_name[i]+" by "+custom_level_auth[i]);
+        /*an idea... make fake pages
+        this certainly wasn't designed for this but... i can clean it up later
+        */
+        var push = floor(sel/14); // why why why why why
+        var push_max = floor((custom_levels-1)/14); // why why why why why
+        for (var i = 0+(push*14); i &lt; 14+(push*14) ++i;){
+            if (i &lt; custom_levels){
+                if (sel == i){
+                    draw_text_border(160,60+((i-(push*14))*10),"&gt; "+custom_level_name[i]+" by "+custom_level_auth[i]+" &lt;");
+                }else{
+                    draw_text_border(160,60+((i-(push*14))*10),custom_level_name[i]+" by "+custom_level_auth[i]);
+                }
             }
         }
+        draw_text_border(160-80,215,string(sel+1)+"/"+string(custom_levels));
+        draw_text_border(160+80,215,"Page: "+string(push+1)+"/"+string(push_max+1));
     }else{
-        draw_text_border(160,60+(i*10),"Levels can be");
+        draw_text_border(160,110,"You don't have any lol");
+        draw_text_border(160,120,"Check AM2RDiscord for any levels that you like");
+        draw_text_border(160,130,"and put them within the following folder:");
+        draw_set_font(fontMenuTinyDefault);
+        draw_text_border(160,140,string_replace_all(game_save_id,"\","/")+"stages");
+        draw_set_font(fontGUI2Default);
     }
 break;
 }

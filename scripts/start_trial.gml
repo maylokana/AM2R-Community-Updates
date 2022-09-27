@@ -4,6 +4,7 @@ global.missiles = 0;
 global.maxmissiles = 1;
 global.maxsmissiles = 1;
 global.maxpbombs = 1;
+global.cbeam = 1;
 global.ingame = 1; // set global as "ingame"
 oControl.mod_IGT = 0; // it won't leave me alone
 // this is a mess of vars

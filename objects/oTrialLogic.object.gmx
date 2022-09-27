@@ -77,15 +77,21 @@ while (!file_text_eof(file)){
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 6: // missileblock
-            instance_create(xx,yy,oBlockMissile);
+            with (instance_create(xx,yy,oBlockMissile)){
+                regentime = -1;
+            }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 7: // superblock
-            instance_create(xx,yy,oBlockSMissile);
+            with (instance_create(xx,yy,oBlockSMissile)){
+                regentime = -1;
+            }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 8: // pbombblock
-            instance_create(xx,yy,oBlockPBomb);
+            with (instance_create(xx,yy,oBlockPBomb)){
+                regentime = -1;
+            }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 9: // screwblock
@@ -106,11 +112,12 @@ while (!file_text_eof(file)){
             instance_create(xx,yy,oTrialGoal);
         break;
         case 13: // spikes
-            instance_create(xx,yy,oSpikes2);
+            instance_create(xx,yy,oSpikes4);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
         break;
         // items
         case 14: // spiderball
-            //instance_create(xx,yy+16,oTTSpider);
+            instance_create(xx,yy+16,oTTSpider);
         break;
         case 15: // jumpball
             instance_create(xx,yy+16,oTTSpring);
@@ -119,7 +126,7 @@ while (!file_text_eof(file)){
             instance_create(xx,yy+16,oTTHijump);
         break;
         case 17: // spacejump
-            //instance_create(xx,yy+16,oSpikes2);
+            instance_create(xx,yy+16,oTTSpace);
         break;
         case 18: // bombs
             instance_create(xx,yy+16,oTTBomb);
@@ -131,7 +138,7 @@ while (!file_text_eof(file)){
             instance_create(xx,yy+16,oTTSuper);
         break;
         case 21: // power
-            //instance_create(xx,yy+16,oSpikes2);
+            instance_create(xx,yy+16,oTTPower);
         break;
         case 22: // screw
             instance_create(xx,yy+16,oTTScrew);
@@ -147,16 +154,49 @@ for (var i = 0; i &lt; 200; ++i;){
     for (var v = 0; v &lt; 150; ++v;){
         switch (ds_grid_get(grid,i,v)){
             case 1:
-                tile_add(tlArea1A,0,0,16,16,i*16,v*16,-100);
+                tile_add(tlTimeTrial,0,0,16,16,i*16,v*16,-100);
             break;
             case 2:
-                tile_add(tlArea1A,0,224,16,16,i*16,v*16,-100);
+                tile_add(tlTimeTrial,32,0,16,16,i*16,v*16,-100);
             break;
             case 3:
-                tile_add(tlArea1A,16,224,16,16,i*16,v*16,-100);
+                tile_add(tlTimeTrial,48,0,16,16,i*16,v*16,-100);
             break;
             case 4:
-                tile_add(tlArea1A,112,352,16,16,i*16,v*16,-122);
+                tile_add(tlTimeTrial,16,0,16,16,i*16,v*16,-122);
+            break;
+            case 5: // spikes
+                var place = 0;
+                // messy code.. but it works
+                if (ds_grid_get(grid,i,v-1) == 1){
+                    place = 2; // place on ceiling
+                }
+                if (ds_grid_get(grid,i,v+1) == 1){
+                    place = 1; // place on floor
+                }
+                if (ds_grid_get(grid,i+1,v) != 5 &amp;&amp; ds_grid_get(grid,i-1,v) != 5){
+                // don't perform wall checks if there are spikes on the sides, otherwise..
+                    if (ds_grid_get(grid,i-1,v) == 1){
+                        place = 3; // place on left wall
+                    }
+                    if (ds_grid_get(grid,i+1,v) == 1){
+                        place = 4; // place on right wall
+                    }
+                }
+                switch (place){
+                    case 2:
+                        tile_add(tlTimeTrial,32,16,16,16,i*16,v*16,-122);
+                    break;
+                    case 3:
+                        tile_add(tlTimeTrial,16,16,16,16,i*16,v*16,-122);
+                    break;
+                    case 4:
+                        tile_add(tlTimeTrial,48,16,16,16,i*16,v*16,-122);
+                    break;
+                    default:
+                        tile_add(tlTimeTrial,0,16,16,16,i*16,v*16,-122);
+                    break;
+                }
             break;
         }
     }

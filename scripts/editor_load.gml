@@ -1,5 +1,5 @@
 editor_message("Loading...");
-var load = get_open_filename_ext("Level (.am2rials)|*.am2rials","",working_directory+"stages/","Select Stage");
+var load = get_open_filename_ext("Level (.am2rials)|*.am2rials","",working_directory+"stage","Select Stage");
 
 if (load != ""){
     // perish obj

@@ -27,8 +27,6 @@
             <kind>1</kind>
             <string>if (global.skip_mMenu == 1){
    room_change(trialselectroom,0);
-}else{
-   trials_check_save();
 }
 </string>
           </argument>
