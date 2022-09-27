@@ -43,7 +43,12 @@ repeat (3){
     file_text_readln(file);
 }
 // get a var from the last one
-var hdn = real(file_text_read_string(file));
+var fr = file_text_read_string(file);
+if (fr == ""){
+    var hdn = 1;
+}else{
+    var hdn = real(fr);
+}
 file_text_readln(file);
 
 // objs
