@@ -2,6 +2,8 @@
 
 Time Trials is a fork of AM2R Community Updates that replaces the original gameloop of AM2R in favor of a series of movement courses. **If you are looking for AM2R Community Updates then [follow the link here](https://github.com/AM2R-Community-Developers/AM2R-Community-Updates).**
 
+[Check out this list of levels if you're looking for levels to play!](https://github.com/VanessaMae1087/AM2R-TimeTrials-Level-List)
+
 # Original README
 
 ## What is this?
