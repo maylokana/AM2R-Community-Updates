@@ -97,8 +97,9 @@ if (mouse_check_button(mb_left)){
    if (!lockout){ // can't place if lockout exists
    var xx = floor(mouse_x/16)*16;
    var yy = floor(mouse_y/16)*16;
+   if (xx &lt; 0 || xx &gt; room_width-1) then exit; // anti-widescreen lockout
    var no_multi = 0;
-   if (solid_place == 11 || solid_place == 14 || solid_place == 15 || solid_place == 16 || solid_place == 17 || solid_place == 18 || solid_place == 22 || solid_place == 23){
+   if (solid_place == 11 || solid_place == 14 || solid_place == 15 || solid_place == 16 || solid_place == 17 || solid_place == 18 || solid_place == 22 || solid_place == 23 || solid_place == 34 || solid_place == 35 || solid_place == 37 || solid_place == 38 || solid_place == 39){
         no_multi = 1;
    }
    with (oEditorSolid){ // a check to deny further placement of solids on top of each other OR if attempting to place multiple spawns
@@ -274,6 +275,90 @@ if (relay_button &gt; -1){
             // speedbooster
             editor_message("Selected Speed Booster");
             solid_place = 23;
+        break;
+        case 28:
+            with (trial_tab_bottom){
+                if (tab_data){
+                    tab_data = 0;
+                }else{
+                    tab_data = 1;
+                }
+                event_user(0);
+            }
+        break;
+        case 29:
+            // heal tile
+            editor_message("Selected Regen Field");
+            solid_place = 24;
+        break;
+        case 33:
+            // static stepblock
+            editor_message("Selected Crumble Solid [S]");
+            solid_place = 25;
+        break;
+        case 34:
+            // static shoottile
+            editor_message("Selected Breakable Block [S]");
+            solid_place = 26;
+        break;
+        case 35:
+            // static shoottile
+            editor_message("Selected Bomb Block [S]");
+            solid_place = 27;
+        break;
+        case 36:
+            // static shoottile
+            editor_message("Selected Missile Block [S]");
+            solid_place = 28;
+        break;
+        case 37:
+            // static shoottile
+            editor_message("Selected Super Missile Block [S]");
+            solid_place = 29;
+        break;
+        case 38:
+            // static shoottile
+            editor_message("Selected Power Bomb Block [S]");
+            solid_place = 30;
+        break;
+        case 39:
+            // static shoottile
+            editor_message("Selected Screw Attack Block [S]");
+            solid_place = 31;
+        break;
+        case 40:
+            // static shoottile
+            editor_message("Selected Speedbooster Block [S]");
+            solid_place = 32;
+        break;
+        case 41:
+            // ammo tile
+            editor_message("Selected Ammo Field");
+            solid_place = 33;
+        break;
+        case 45:
+            editor_message("Selected Morph Ball");
+            solid_place = 34;
+        break;
+        case 46:
+            editor_message("Selected Power Grip");
+            solid_place = 35;
+        break;
+        case 47:
+            editor_message("Selected Energy Tank");
+            solid_place = 36;
+        break;
+        case 50:
+            editor_message("Selected Charge Beam");
+            solid_place = 37;
+        break;
+        case 51:
+            editor_message("Selected Wave Beam");
+            solid_place = 38;
+        break;
+        case 52:
+            editor_message("Selected Spazer Beam");
+            solid_place = 39;
         break;
         default:
             // not much to say so fun fact! smart tab is terrible

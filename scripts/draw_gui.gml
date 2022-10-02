@@ -195,7 +195,7 @@ if (global.etanks > 10)
     }
 }
 draw_set_font(global.guifont2);
-if (global.missiles > 0) {
+if (global.maxmissiles > 0) {
 if (global.maxmissiles >= 100) {
 draw_background(bgGUIMsl, xoff, 0);
 } else draw_background(bgGUISmsl, xoff, 0);
@@ -216,7 +216,7 @@ if (global.maxmissiles >= 100) {
 xoff += 45;
 } else xoff += 38;
 }
-if (global.smissiles > 0) {
+if (global.maxsmissiles > 0) {
 draw_background(bgGUISmsl, xoff, 0);
 draw_text(xoff + 19, 7, string(global.smissiles));
 if (global.opmslstyle == 0) {
@@ -233,7 +233,7 @@ draw_sprite(sGUISMissile, 1, xoff + 1, 4);
 }
 xoff += 38;
 }
-if (global.pbombs > 0) {
+if (global.maxpbombs > 0) {
 draw_background(bgGUISmsl, xoff, 0);
 draw_text(xoff + 19, 7, string(global.pbombs));
 if (global.opmslstyle == 0) {

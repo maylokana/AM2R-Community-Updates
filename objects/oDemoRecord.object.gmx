@@ -25,23 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.tt_vers = "v0.3";
-global.tt_verr = 2;
-if (global.skip_mMenu == 1){ // skip to trial select
-    room_change(trialselectroom,0);
-}else{ // perform conversion check
-    if (directory_exists("stages/")){
-        var file = file_find_first("stages/*.am2rials",0);
-        if (file != ""){ // stages do exist!
-            convert_level(file);
-            var file = file_find_next();
-            while (file != ""){
-                convert_level(file);
-                var file = file_find_next();
-            }
-        }
-    }
-}
+            <string>demo_valid = 1;
+demo_inputs = 0;
+
+demo_uppr = 0;
+demo_dnpr = 0;
+demo_rtpr = 0;
+demo_lfpr = 0;
+
+demo_frpr = 0;
+demo_jppr = 0;
 </string>
           </argument>
         </arguments>

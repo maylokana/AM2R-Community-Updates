@@ -20,6 +20,13 @@
   <width>16</width>
   <height>16</height>
   <frames>
-    <frame index="0">images\sBlockShoot_0.png</frame>
+    <frame index="0">images\sAmmoField_0.png</frame>
+    <frame index="1">images\sAmmoField_1.png</frame>
+    <frame index="2">images\sAmmoField_2.png</frame>
+    <frame index="3">images\sAmmoField_3.png</frame>
+    <frame index="4">images\sAmmoField_4.png</frame>
+    <frame index="5">images\sAmmoField_5.png</frame>
+    <frame index="6">images\sAmmoField_6.png</frame>
+    <frame index="7">images\sAmmoField_7.png</frame>
   </frames>
 </sprite>

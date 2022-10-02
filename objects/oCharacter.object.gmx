@@ -312,8 +312,9 @@ if (room != rm_transition) {
     global.myposy = floor((y - 8) / 240);
     global.mapposx = global.myposx + global.mapoffsetx;
     global.mapposy = global.myposy + global.mapoffsety;
-    if (global.dmap[global.mapposx, global.mapposy] == 0) global.dmap[global.mapposx, global.mapposy] = 1;
-    if (prevmapposx != global.mapposx || prevmapposy != global.mapposy) with (oControl) event_user(2);
+    // commenting this out should work..?
+    // if (global.dmap[global.mapposx, global.mapposy] == 0) global.dmap[global.mapposx, global.mapposy] = 1;
+    //if (prevmapposx != global.mapposx || prevmapposy != global.mapposy) with (oControl) event_user(2);
 } else image_speed = 0;
 //
 block_id = -4;

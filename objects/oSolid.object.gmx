@@ -79,8 +79,7 @@ tl2_delete_layer = -112;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>active = 1;
-if (material == -1) material = global.floormaterial;
+            <string>if (material == -1) material = global.floormaterial;
 if (tileid != 0) visible = false;
 visible = true;
 </string>

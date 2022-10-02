@@ -3407,6 +3407,9 @@
       <sprite>sprites\sEditorStartIcon</sprite>
       <sprite>sprites\sGoal</sprite>
       <sprite>sprites\sGoalStrip</sprite>
+      <sprite>sprites\sHealField</sprite>
+      <sprite>sprites\sAmmoField</sprite>
+      <sprite>sprites\sStaticLabel</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -4372,6 +4375,8 @@
       <script>scripts\editor_load.gml</script>
       <script>scripts\generate_id.gml</script>
       <script>scripts\get_stage_data.gml</script>
+      <script>scripts\convert_level.gml</script>
+      <script>scripts\split_object_string.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5426,12 +5431,17 @@
       <object>objects\oTrialAutoad</object>
       <object>objects\oTTBooster</object>
       <object>objects\oTTScrew</object>
+      <object>objects\oTTWBeam</object>
+      <object>objects\oTTCBeam</object>
+      <object>objects\oTTSBeam</object>
       <object>objects\oTTSpace</object>
       <object>objects\oTTHijump</object>
       <object>objects\oTTPGrip</object>
+      <object>objects\oTTMorph</object>
       <object>objects\oTTBomb</object>
       <object>objects\oTTSpring</object>
       <object>objects\oTTMissile</object>
+      <object>objects\oTTEnergy</object>
       <object>objects\oTTPower</object>
       <object>objects\oTTSpider</object>
       <object>objects\oTTSuper</object>
@@ -5444,6 +5454,9 @@
       <object>objects\oInfoButton</object>
       <object>objects\oEditorInfo</object>
       <object>objects\oEditorHelp</object>
+      <object>objects\oDemoRecord</object>
+      <object>objects\oTTAmmoField</object>
+      <object>objects\oTTHealField</object>
     </objects>
   </objects>
   <timelines name="timelines">

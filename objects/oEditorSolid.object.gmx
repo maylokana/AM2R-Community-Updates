@@ -36,29 +36,37 @@ switch (solid_style){
     case 2:
         draw_sprite(sSlope2,0,x,y);
     break;
-    case 3:
+    case 3: case 25:
         draw_sprite(sBlockStep,0,x,y);
+        if (solid_style == 25) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 4:
+    case 4: case 26:
         draw_sprite(sBlockShoot,0,x,y);
+        if (solid_style == 26) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 5:
+    case 5: case 27:
         draw_sprite(sBlockBomb,0,x,y);
+        if (solid_style == 27) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 6:
+    case 6: case 28:
         draw_sprite(sBlockMissile,0,x,y);
+        if (solid_style == 28) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 7:
+    case 7: case 29:
         draw_sprite(sBlockSMissile,0,x,y);
+        if (solid_style == 29) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 8:
+    case 8: case 30:
         draw_sprite(sBlockPBomb,0,x,y);
+        if (solid_style == 30) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 9:
+    case 9: case 31:
         draw_sprite(sBlockScrew,0,x,y);
+        if (solid_style == 31) then draw_sprite(sStaticLabel,0,x,y);
     break;
-    case 10:
+    case 10: case 32:
         draw_sprite(sBlockSpeed,0,x,y);
+        if (solid_style == 32) then draw_sprite(sStaticLabel,0,x,y);
     break;
     case 11:
         draw_sprite(sEditorStart,0,x+8,y+16);
@@ -99,6 +107,31 @@ switch (solid_style){
     break;
     case 23:
         draw_sprite(sItemSpeedBooster,0,x+0,y+16);
+    break;
+    case 34:
+        draw_sprite(sItemMorphBall,0,x+0,y+16);
+    break;
+    case 35:
+        draw_sprite(sItemPowergrip,0,x+0,y+16);
+    break;
+    case 36:
+        draw_sprite(sItemEnergyTank,0,x+0,y+16);
+    break;
+    case 37:
+        draw_sprite(sItemChargeBeam,0,x+0,y+16);
+    break;
+    case 38:
+        draw_sprite(sItemWaveBeam,0,x+0,y+16);
+    break;
+    case 39:
+        draw_sprite(sItemSpazerBeam,0,x+0,y+16);
+    break;
+    // fields
+    case 24:
+        draw_sprite(sHealField,0,x+0,y+0);
+    break;
+    case 33:
+        draw_sprite(sAmmoField,0,x+0,y+0);
     break;
 }
 </string>

@@ -34,7 +34,7 @@ bu[1] = c_white;
 create_button_alt(214,80,200,10,0,oTrialEditor.stage_name,0,bu[0]);
 create_button_alt(214,100,200,10,1,oTrialEditor.stage_auth,1,bu[1]);
 
-create_button_alt(232,130,80,10,3,"Toggle",2,c_aqua);
+create_button_alt(240,130,80,10,3,"Toggle",2,c_aqua);
 create_button_alt(160,160,70,10,2,"Confirm",2,c_lime);
 
 relay_button = -1;
@@ -187,9 +187,10 @@ draw_set_valign(fa_center);
 draw_text(80+x,80+y,"Level Name");
 draw_text(80+x,100+y,"Level Author");
 
+draw_set_halign(fa_center);
 var s = "Enabled";
 if (oTrialEditor.objs_hidden = false) then s = "Disabled";
-draw_text(160+x,130+y,"Hidden Blocks: "+s);
+draw_text(80+x,130+y,"Hidden Blocks: "+s);
 </string>
           </argument>
         </arguments>

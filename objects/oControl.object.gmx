@@ -1081,7 +1081,8 @@ if (os_is_native) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>m1 = string(global.map[global.mapposx, global.mapposy]);
+            <string>/*
+m1 = string(global.map[global.mapposx, global.mapposy]);
 m2 = string(global.map[global.mapposx - 2, global.mapposy - 1]);
 m3 = string(global.map[global.mapposx - 1, global.mapposy - 1]);
 m4 = string(global.map[global.mapposx, global.mapposy - 1]);
@@ -1115,6 +1116,7 @@ if (global.mapmarker) {
     moffx = global.mapmarkerx - global.mapposx;
     moffy = global.mapmarkery - global.mapposy;
 }
+*/
 </string>
           </argument>
         </arguments>

@@ -34,12 +34,16 @@ timer_started = 0;
 timer = 0; // in tics
 
 // GENERATING THE LEVEL
+var consolidate = 1; // whether solid consolidation will occur
 // grid for making visuals later
 var grid = ds_grid_create(200,150);
+// grid for consolidation later
+var cnsl = ds_grid_create(200,150);
+ds_grid_set_region(cnsl,0,0,199,149,-1);
 // open the file yoinked from global.level_is
 var file = file_text_open_read("stages/"+global.level_is);
 // skip the strings, they aren't important
-repeat (3){
+repeat (5){
     file_text_readln(file);
 }
 // get a var from the last one
@@ -53,16 +57,16 @@ file_text_readln(file);
 
 // objs
 while (!file_text_eof(file)){
-    var xx = file_text_read_real(file);
-    file_text_readln(file);
-    var yy = file_text_read_real(file);
-    file_text_readln(file);
-    var ty = file_text_read_real(file);
+    split_object_string(file_text_read_string(file));
+    var xx = real(s_part[0]);
+    var yy = real(s_part[1]);
+    var ty = real(s_part[2]);
     file_text_readln(file);
     switch (ty){
         case 0: // normal solid
             instance_create(xx,yy,oSolid1);
             ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
+            ds_grid_set(cnsl,floor(xx/16),floor(yy/16),0);
         break;
         case 1: // slope 1
             instance_create(xx,yy,oSlope1);
@@ -85,21 +89,15 @@ while (!file_text_eof(file)){
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 6: // missileblock
-            with (instance_create(xx,yy,oBlockMissile)){
-                regentime = -1;
-            }
+            instance_create(xx,yy,oBlockMissile);
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 7: // superblock
-            with (instance_create(xx,yy,oBlockSMissile)){
-                regentime = -1;
-            }
+            instance_create(xx,yy,oBlockSMissile);
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 8: // pbombblock
-            with (instance_create(xx,yy,oBlockPBomb)){
-                regentime = -1;
-            }
+            instance_create(xx,yy,oBlockPBomb);
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 9: // screwblock
@@ -108,6 +106,54 @@ while (!file_text_eof(file)){
         break;
         case 10: // speedblock
             instance_create(xx,yy,oBlockSpeed);
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 25: // crack block
+            with (instance_create(xx,yy,oBlockStep)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 26: // beamblock
+            with (instance_create(xx,yy,oBlockShoot)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 27: // bombblock
+            with (instance_create(xx,yy,oBlockBomb)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 28: // missileblock
+            with (instance_create(xx,yy,oBlockMissile)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 29: // superblock
+            with (instance_create(xx,yy,oBlockSMissile)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 30: // pbombblock
+            with (instance_create(xx,yy,oBlockPBomb)){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 31: // screwblock
+            with instance_create(xx,yy,oBlockScrew){
+                regentime = -1;
+            }
+            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+        break;
+        case 32: // speedblock
+            with instance_create(xx,yy,oBlockSpeed){
+                regentime = -1;
+            }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
         break;
         case 11: // spawn. also for filling grid
@@ -120,7 +166,10 @@ while (!file_text_eof(file)){
             instance_create(xx,yy,oTrialGoal);
         break;
         case 13: // spikes
-            instance_create(xx,yy,oSpikes4);
+            with (instance_create(xx+2,yy+2,oSpikes4)){
+                image_xscale = 0.75;
+                image_yscale = 0.75;
+            }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
         break;
         // items
@@ -154,8 +203,59 @@ while (!file_text_eof(file)){
         case 23: // speed
             instance_create(xx,yy+16,oTTBooster);
         break;
+        case 34: // morph
+            instance_create(xx,yy+16,oTTMorph);
+        break;
+        case 35: // pgrip
+            instance_create(xx,yy+16,oTTPGrip);
+        break;
+        case 24: // heal
+            instance_create(xx,yy,oTTHealField);
+        break;
+        case 33: // ammo
+            instance_create(xx,yy,oTTAmmoField);
+        break;
+        case 36: // etank
+            instance_create(xx,yy+16,oTTEnergy);
+        break;
+        case 37: // charge
+            instance_create(xx,yy+16,oTTCBeam);
+        break;
+        case 38: // wave
+            instance_create(xx,yy+16,oTTWBeam);
+        break;
+        case 39: // spazer
+            instance_create(xx,yy+16,oTTSBeam);
+        break;
     }
 }
+
+// consolidation code
+if (consolidate){
+    // firsly, find pure corner pieces
+    for (var i = 0; i &lt; 200; ++i;){
+        for (var v = 0; v &lt; 150; ++v;){
+            if (ds_grid_get(cnsl,i,v) != -1){
+                // x check
+                var x_o = 0;
+                if (i == 0){
+                    x_o = 1;
+                }else{
+                    if (ds_grid_get(cnsl,i-1,v) == -1) then x_o = 1;
+                }
+                // y check
+                var y_o = 0;
+                if (v == 0){
+                    y_o = 1;
+                }else{
+                    if (ds_grid_get(cnsl,i,v-1) == -1) then y_o = 1;
+                }
+                if (x_o &amp;&amp; y_o) then ds_grid_set(cnsl,i,v,1);
+            }
+        }
+    }
+}
+ds_grid_destroy(cnsl);
 
 // now make visuals off of the grid
 for (var i = 0; i &lt; 200; ++i;){

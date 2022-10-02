@@ -63,7 +63,7 @@ global.floormaterial = 4;</code>
     <instance objName="oSolid1" x="272" y="144" name="inst_135971" locked="0" code="" scaleX="3" scaleY="3" colour="4294967295" rotation="0"/>
     <instance objName="oSolid1" x="272" y="48" name="inst_135972" locked="0" code="" scaleX="3" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="oDoorA5" x="296" y="80" name="inst_135973" locked="0" code="" scaleX="-1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oWarpPipeTrigger" x="64" y="112" name="inst_135974" locked="0" code="&#xA;targetroom = rm_a5b08;&#xA;targetx = 72;&#xA;targety = 192;&#xA;direction = 270;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWarpPipeTrigger" x="64" y="112" name="inst_135974" locked="0" code="targetroom = rm_a5b08;&#xA;targetx = 72;&#xA;targety = 192;&#xA;direction = 270;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oGotoRoom" x="320" y="144" name="inst_135975" locked="0" code="&#xA;targetroom = rm_a5a08;&#xA;targetx = 16;&#xA;targety = 384;&#xA;height = 64;&#xA;direction = 0;&#xA;camstartx = 16;&#xA;camstarty = 360;&#xA;transitionx = 4;&#xA;transitiony = 144;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oSolid1" x="80" y="144" name="inst_135976" locked="0" code="" scaleX="3" scaleY="3" colour="4294967295" rotation="0"/>
     <instance objName="oSlopeFL2" x="128" y="144" name="inst_135977" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

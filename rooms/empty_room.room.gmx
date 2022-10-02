@@ -10,7 +10,7 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>// map0 functions as the test room.
+  <code>// empty_room functions as the base room
 oMusicV2.currentbgm = musCaveAmbience;</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>

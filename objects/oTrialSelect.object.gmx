@@ -45,22 +45,7 @@ active = 1; // whether the menus are active
 cat = 0; // category
 sel = 0; // (cursor) selection
 
-// custom levels
-custom_levels = 0;
-// set up folders if they're not there
-if (!directory_exists("stages/")){
-    directory_create("stages/");
-}else{ // otherwise, dig in
-    var file = file_find_first("stages/*.am2rials",0);
-    if (file != ""){ // stages do exist!
-        get_stage_data(file);
-        var file = file_find_next();
-        while (file != ""){
-            get_stage_data(file);
-            var file = file_find_next();
-        }
-    }
-}
+event_user(0);
 
 // genuinely don't worry about any of this..
 // course select variables
@@ -209,7 +194,7 @@ if (oControl.kMenu1Pressed){
    cat = 1;
    map_scroll = real_scroll;
    */
-    cat = 2;
+   cat = 2;
    break;
    case 1:
    room_change(trialeditor,0);
@@ -273,6 +258,39 @@ case 2:
         cat = 0;
         sel = 0;
     }
+    if (oControl.kMissilePressed){
+        sfx_play(sndMToggle);
+        sel = 0;
+        event_user(0); 
+    }
+    if (oControl.kSelectPressed){
+        if (custom_levels != 0){
+            sfx_play(sndMSwitch);
+            cat = 3;
+        }
+    }
+break;
+case 3:
+    if (oControl.kMenu1Pressed){
+        var file_find = 0;
+        var file = file_find_first("stages/*.am2rials",0);
+        if (sel != 0){
+            while (sel != file_find){
+                ++file_find;
+                var file = file_find_next();
+            }
+        }
+        show_debug_message(string(file_find)+" | "+string(file));
+        show_debug_message(file_delete("stages/"+file));
+        sfx_play(sndMissileExpl);
+        cat = 2;
+        sel = 0;
+        event_user(0);
+    }
+    if (oControl.kMenu2Pressed){
+        sfx_play(sndMenuCancel);
+        cat = 2;
+    }
 break;
 }
 }
@@ -291,9 +309,12 @@ case 0:
             flavor_text = "Access AM2R's settings to tweak gameplay options.";
             break;
             case 3:
-            flavor_text = "Make like a tree and get out of here!"
+            flavor_text = "Make like a tree and get out of here!";
             break;
      }
+break;
+case 2:
+    flavor_text = "Missile - Reload Levels | Select - Delete Levels";
 break;
 }
 
@@ -308,6 +329,44 @@ if (real_scroll &gt; (available_maps*10)-80) then real_scroll = (available_maps*
    map_scroll -= (map_scroll-real_scroll)/2;
    }
 //if (abs(real_scroll-map_scroll) &lt; 0.125) then round(map_scroll); // round cap
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// custom levels
+custom_levels = 0;
+// set up folders if they're not there
+if (!directory_exists("stages/")){
+    directory_create("stages/");
+}else{ // otherwise, dig in
+    var file = file_find_first("stages/*.am2rials",0);
+    if (file != ""){ // stages do exist!
+        get_stage_data(file);
+        var file = file_find_next();
+        while (file != ""){
+            get_stage_data(file);
+            var file = file_find_next();
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -405,6 +464,7 @@ draw_set_color(c_yellow);
 draw_text_border(300,210,"Dev Time: "+time_string(map_info[4,sel]));
 break;
 case 2: // new course select
+    draw_set_font(fontGUI2Default);
     draw_set_halign(fa_center);
     draw_set_color(c_white);
     draw_text_border(160,30,string(custom_levels)+" levels found");
@@ -412,27 +472,39 @@ case 2: // new course select
         /*an idea... make fake pages
         this certainly wasn't designed for this but... i can clean it up later
         */
-        var push = floor(sel/14); // why why why why why
-        var push_max = floor((custom_levels-1)/14); // why why why why why
-        for (var i = 0+(push*14); i &lt; 14+(push*14) ++i;){
+        var push = floor(sel/16); // why why why why why
+        var push_max = floor((custom_levels-1)/16); // why why why why why
+        draw_set_halign(fa_left);
+        for (var i = 0+(push*16); i &lt; 16+(push*16) ++i;){
             if (i &lt; custom_levels){
                 if (sel == i){
-                    draw_text_border(160,60+((i-(push*14))*10),"&gt; "+custom_level_name[i]+" by "+custom_level_auth[i]+" &lt;");
+                    draw_text_border(20,45+((i-(push*16))*10),"&gt; "+custom_level_name[i]);
                 }else{
-                    draw_text_border(160,60+((i-(push*14))*10),custom_level_name[i]+" by "+custom_level_auth[i]);
+                    draw_text_border(20,45+((i-(push*16))*10),""+custom_level_name[i]);
                 }
             }
         }
+        draw_set_font(fontMenuTinyDefault);
+        draw_set_halign(fa_right);
+        draw_text_border(300,195,"Creator: "+custom_level_auth[sel]);
+        draw_set_font(fontGUI2Default);
+        draw_set_halign(fa_center);
         draw_text_border(160-80,215,string(sel+1)+"/"+string(custom_levels));
         draw_text_border(160+80,215,"Page: "+string(push+1)+"/"+string(push_max+1));
     }else{
-        draw_text_border(160,110,"You don't have any lol");
-        draw_text_border(160,120,"Check AM2RDiscord for any levels that you like");
-        draw_text_border(160,130,"and put them within the following folder:");
+        draw_text_border(160,110,"No levels were found. Looking for them?");
+        draw_text_border(160,120,"Check the README for a list of levels, and");
+        draw_text_border(160,130,"put them within the following folder:");
         draw_set_font(fontMenuTinyDefault);
         draw_text_border(160,140,string_replace_all(game_save_id,"\","/")+"stages");
         draw_set_font(fontGUI2Default);
     }
+break;
+case 3:
+    draw_set_halign(fa_center);
+    draw_set_color(c_white);
+    draw_text_border(160,105,"Really delete this level?");
+    draw_text_border(160,125,custom_level_name[sel]+" by "+custom_level_auth[sel]);
 break;
 }
 
