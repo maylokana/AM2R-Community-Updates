@@ -11,4 +11,4 @@ for (var i = 1; i < string_length(argument0)+1; ++i;){
     }
 }
 
-show_debug_message(argument0+" -> '"+s_part[0]+","+s_part[1]+","+s_part[2]+"'");
+//show_debug_message(argument0+" -> '"+s_part[0]+","+s_part[1]+","+s_part[2]+"'");

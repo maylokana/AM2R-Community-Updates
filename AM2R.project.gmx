@@ -5455,6 +5455,7 @@
       <object>objects\oEditorInfo</object>
       <object>objects\oEditorHelp</object>
       <object>objects\oDemoRecord</object>
+      <object>objects\oDemoPlayback</object>
       <object>objects\oTTAmmoField</object>
       <object>objects\oTTHealField</object>
     </objects>
