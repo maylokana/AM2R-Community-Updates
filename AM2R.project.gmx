@@ -1287,6 +1287,7 @@
       <sound>sound\musGenesis</sound>
       <sound>sound\musTrialsMenu</sound>
       <sound>sound\musTrialsWin</sound>
+      <sound>sound\musTrialsNewPB</sound>
       <sound>sound\musTrialsPlay</sound>
     </sounds>
     <sounds name="A4">
@@ -4377,6 +4378,8 @@
       <script>scripts\get_stage_data.gml</script>
       <script>scripts\convert_level.gml</script>
       <script>scripts\split_object_string.gml</script>
+      <script>scripts\save_action.gml</script>
+      <script>scripts\ds_grid_get_l.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-4999999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,15 +26,214 @@
           <argument>
             <kind>1</kind>
             <string>demo_valid = 1;
-demo_inputs = 0;
+demo_actions = 0;
 
-demo_uppr = 0;
-demo_dnpr = 0;
-demo_rtpr = 0;
-demo_lfpr = 0;
+demo_action[0] = -1;
+demo_acttic[0] = -1;
 
-demo_frpr = 0;
-demo_jppr = 0;
+demo_tick = 0;
+
+// settings
+demo_aimstyle = global.opaimstyle;
+demo_misstyle = global.opmslstyle;
+demo_morstyle = global.opmrpstyle;
+demo_spistyle = global.opspdstyle;
+demo_clistyle = global.opautoclimb;
+demo_mo2style = global.opautomorph;
+
+// actions
+demo_up_press = 0;
+demo_down_press = 0;
+demo_right_press = 0;
+demo_left_press = 0;
+
+demo_jump_press = 0;
+demo_fire_press = 0;
+demo_miss_press = 0;
+demo_sele_press = 0;
+demo_aim1_press = 0;
+demo_aim2_press = 0;
+demo_walk_press = 0;
+demo_morp_press = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (demo_valid){
+    /*
+    if something is amiss, then invalidate the run because i'm
+    not dealing with this mess
+    */
+    if (demo_aimstyle != global.opaimstyle || demo_misstyle != global.opmslstyle || demo_morstyle != global.opmrpstyle || demo_clistyle != global.opautoclimb || demo_mo2style != global.opautomorph || demo_spistyle != global.opspdstyle){
+        demo_valid = 0;
+    }
+
+    ++demo_tick;
+    
+    // inputs time!
+    // directional up
+    if (demo_up_press != oControl.kUp){
+        if (!demo_up_press){
+            save_action(0);
+        }else{
+            save_action(12);
+        }
+        demo_up_press = oControl.kUp;
+    }
+    // directional down
+    if (demo_down_press != oControl.kDown){
+        if (!demo_down_press){
+            save_action(1);
+        }else{
+            save_action(13);
+        }
+        demo_down_press = oControl.kDown;
+    }
+    // directional right
+    if (demo_right_press != oControl.kRight){
+        if (!demo_right_press){
+            save_action(2);
+        }else{
+            save_action(14);
+        }
+        demo_right_press = oControl.kRight;
+    }
+    // directional left
+    if (demo_left_press != oControl.kLeft){
+        if (!demo_left_press){
+            save_action(3);
+        }else{
+            save_action(15);
+        }
+        demo_left_press = oControl.kLeft;
+    }
+    // jump key
+    if (demo_jump_press != oControl.kJump){
+        if (!demo_jump_press){
+            save_action(4);
+        }else{
+            save_action(16);
+        }
+        demo_jump_press = oControl.kJump;
+    }
+    // fire key
+    if (demo_fire_press != oControl.kFire){
+        if (!demo_fire_press){
+            save_action(5);
+        }else{
+            save_action(17);
+        }
+        demo_fire_press = oControl.kFire;
+    }
+    // missile select/arm key
+    if (demo_miss_press != oControl.kMissile){
+        if (!demo_miss_press){
+            save_action(6);
+        }else{
+            save_action(18);
+        }
+        demo_miss_press = oControl.kMissile;
+    }
+    // missile cancel/change key
+    if (demo_sele_press != oControl.kSelect){
+        if (!demo_sele_press){
+            save_action(7);
+        }else{
+            save_action(19);
+        }
+        demo_sele_press = oControl.kSelect;
+    }
+    // aim diag/up key
+    if (demo_aim1_press != oControl.kAim){
+        if (!demo_aim1_press){
+            save_action(8);
+        }else{
+            save_action(20);
+        }
+        demo_aim1_press = oControl.kAim;
+    }
+    // aim down key (not used in 1 aim mode, but recording the inputs anyway)
+    if (demo_aim2_press != oControl.kAim2){
+        if (!demo_aim2_press){
+            save_action(9);
+        }else{
+            save_action(21);
+        }
+        demo_aim2_press = oControl.kAim2;
+    }
+    // aimlock key
+    if (demo_walk_press != oControl.kWalk){
+        if (!demo_walk_press){
+            save_action(10);
+        }else{
+            save_action(22);
+        }
+        demo_walk_press = oControl.kWalk;
+    }
+    // quickmorph key
+    if (demo_morp_press != oControl.kMorph){
+        if (!demo_morp_press){
+            save_action(11);
+        }else{
+            save_action(23);
+        }
+        demo_morp_press = oControl.kMorph;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var _x = view_xview[0];
+var _y = view_yview[0];
+
+draw_set_alpha(1);
+draw_set_font(fontGUI2Default);
+draw_set_color(c_white);
+draw_text_border((16+_x)-oControl.widescreen*53,16+_y,"Last Saved Input:");
+if (demo_actions){
+    draw_text_border((16+_x)-oControl.widescreen*53,26+_y,"ID: "+string(demo_action[demo_actions-1])+", at tick "+string(demo_acttic[demo_actions-1]));
+}else{
+    draw_text_border((16+_x)-oControl.widescreen*53,26+_y,"N/A");
+}
+draw_set_color(c_red);
+if (!demo_valid) then draw_text_border((16+_x)-oControl.widescreen*53,36+_y,"Demo invalid lmao");
 </string>
           </argument>
         </arguments>

@@ -716,7 +716,7 @@ if (!init) {
     } else { // windows, any other weird platforms
         check_keys();
     }
-    if (room != rm_transition) global_control();
+    if (room != rm_transition &amp;&amp; (!instance_exists(oDemoPlayback))) global_control();
     if (kExit &amp;&amp; global.opexitkeyenable) game_end();
     if (kStart &amp;&amp; kStartPushedSteps == 0) event_user(0);
 }

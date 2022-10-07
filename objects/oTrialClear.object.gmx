@@ -32,6 +32,8 @@ mus_change(musTrialsWin);
 
 _hue = 0;
 _stx = 0;
+
+option = 0;
 </string>
           </argument>
         </arguments>
@@ -54,10 +56,32 @@ _stx = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oControl.kMenu1Pressed){
-audio_stop_all();
-sfx_play(sndMenuMove);
-room_change(trialselectroom,0);
+            <string>if (oControl.kRightPressed){
+    sfx_play(sndMenuMove);
+    ++option;
+    if (option &gt; 2) then option = 0;
+}
+
+if (oControl.kLeftPressed){
+    sfx_play(sndMenuMove);
+    --option;
+    if (option &lt; 0) then option = 2;
+}
+
+if (oControl.kMenu1Pressed){
+    audio_stop_all();
+    sfx_play(sndMenuSel);
+    switch (option){
+        case 0:
+        start_trial();
+        break;
+        case 1: // save demo (i'll do it later..)
+        //room_change(trialselectroom,0);
+        break;
+        case 2:
+        room_change(trialselectroom,0);
+        break;
+    }
 }
 
 _hue += 0.33;
@@ -113,8 +137,25 @@ draw_text(165,125,"GOAL!");
 draw_set_color(make_color_hsv(_hue,170,255));
 draw_text(160,120,"GOAL!");
 draw_set_color(c_white);
+draw_set_font(fontMenuTinyDefault);
+draw_text_border(160,198,"Completed level in "+time_string(global.end_time));
+draw_text_border(160,208,global.sta_name+" by "+global.sta_auth);
 draw_set_font(fontGUI2Default);
-draw_text_border(160,200,"Completed level in "+time_string(global.end_time));
+if (option == 0){
+    draw_text_border(70,222,"&gt; Restart &lt;");
+}else{
+    draw_text_border(70,222,"Restart");
+}
+if (option == 1){
+    draw_text_border(160,222,"&gt; Save Demo &lt;");
+}else{
+    draw_text_border(160,222,"Save Demo");
+}
+if (option == 2){
+    draw_text_border(250,222,"&gt; Exit Level &lt;");
+}else{
+    draw_text_border(250,222,"Exit Level");
+}
 </string>
           </argument>
         </arguments>

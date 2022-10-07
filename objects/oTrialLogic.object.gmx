@@ -34,7 +34,7 @@ timer_started = 0;
 timer = 0; // in tics
 
 // GENERATING THE LEVEL
-var consolidate = 1; // whether solid consolidation will occur
+var consolidate = 0; // whether solid consolidation will occur
 // grid for making visuals later
 var grid = ds_grid_create(200,150);
 // grid for consolidation later
@@ -42,10 +42,17 @@ var cnsl = ds_grid_create(200,150);
 ds_grid_set_region(cnsl,0,0,199,149,-1);
 // open the file yoinked from global.level_is
 var file = file_text_open_read("stages/"+global.level_is);
-// skip the strings, they aren't important
-repeat (5){
+// skip the first two strings
+repeat (2){
     file_text_readln(file);
 }
+// get data for later
+global.sta_name = file_text_read_string(file);
+file_text_readln(file);
+global.sta_auth = file_text_read_string(file);
+file_text_readln(file);
+global.sta_iden = file_text_read_string(file);
+file_text_readln(file);
 // get a var from the last one
 var fr = file_text_read_string(file);
 if (fr == ""){
@@ -64,7 +71,7 @@ while (!file_text_eof(file)){
     file_text_readln(file);
     switch (ty){
         case 0: // normal solid
-            instance_create(xx,yy,oSolid1);
+            if (!consolidate) then instance_create(xx,yy,oSolid1);
             ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
             ds_grid_set(cnsl,floor(xx/16),floor(yy/16),0);
         break;
@@ -230,29 +237,75 @@ while (!file_text_eof(file)){
     }
 }
 
-// consolidation code
+// solid merging code
 if (consolidate){
-    // firsly, find pure corner pieces
-    for (var i = 0; i &lt; 200; ++i;){
-        for (var v = 0; v &lt; 150; ++v;){
-            if (ds_grid_get(cnsl,i,v) != -1){
-                // x check
-                var x_o = 0;
-                if (i == 0){
-                    x_o = 1;
-                }else{
-                    if (ds_grid_get(cnsl,i-1,v) == -1) then x_o = 1;
+    while (1){
+        for (var i = 0; i &lt; 200; ++i;){
+            for (var v = 0; v &lt; 150; ++v;){
+                if (ds_grid_get(cnsl,i,v) != -1){
+                    // x check
+                    var x_o = 0;
+                    if (i == 0){
+                        x_o = 1;
+                    }else{
+                        if (ds_grid_get(cnsl,i-1,v) == -1) then x_o = 1;
+                    }
+                    // y check
+                    var y_o = 0;
+                    if (v == 0){
+                        y_o = 1;
+                    }else{
+                        if (ds_grid_get(cnsl,i,v-1) == -1) then y_o = 1;
+                    }
+                    if (x_o &amp;&amp; y_o){
+                        var widt = 1;
+                        var hegt = 1;
+                        if (ds_grid_get_l(cnsl,i+1,v) != -1){ // horizontal and vertical
+                            // first check
+                            while (ds_grid_get_l(cnsl,i+widt,v) != -1){
+                                ++widt;
+                            }
+                            // second check
+                            while (ds_grid_get_l(cnsl,i,v+hegt) != -1){
+                                var temp_widt = 1;
+                                while (ds_grid_get_l(cnsl,i+temp_widt,v+hegt) != -1){
+                                    ++temp_widt;
+                                }
+                                if (temp_widt == widt){ // equal, continue on
+                                    ++hegt;
+                                    continue;
+                                }else{ // not equal, probably lopsided
+                                    break;
+                                }
+                            }
+                            // final results
+                            ds_grid_set_region(cnsl,i,v,i+(widt-1),v+(hegt-1),-1);
+                            with (instance_create(i*16,v*16,oSolid1)){
+                                image_xscale = widt;
+                                image_yscale = hegt;
+                            }
+                        }else if (ds_grid_get_l(cnsl,i,v+1) != -1){ // vertical only
+                            // check
+                            while (ds_grid_get_l(cnsl,i,v+hegt) != -1){
+                                ++hegt;
+                            }
+                            // final results
+                            ds_grid_set_region(cnsl,i,v,i+(widt-1),v+(hegt-1),-1);
+                            with (instance_create(i*16,v*16,oSolid1)){
+                                image_xscale = widt;
+                                image_yscale = hegt;
+                            }
+                        }else{ // no meeting blocks
+                            ds_grid_set(cnsl,i,v,-1);
+                            instance_create(i*16,v*16,oSolid1);
+                        }
+                        continue; // all done, start another loop
+                    }
                 }
-                // y check
-                var y_o = 0;
-                if (v == 0){
-                    y_o = 1;
-                }else{
-                    if (ds_grid_get(cnsl,i,v-1) == -1) then y_o = 1;
-                }
-                if (x_o &amp;&amp; y_o) then ds_grid_set(cnsl,i,v,1);
             }
         }
+        // for loops are clear, so there must be no more merging to do!
+        break; // FREEDOM
     }
 }
 ds_grid_destroy(cnsl);
@@ -315,6 +368,9 @@ for (var i = 0; i &lt; 200; ++i;){
 ds_grid_destroy(grid);
 // and kill the file because i didn't do that apparently..?
 file_text_close(file);
+
+// finally, create demo record/playback
+instance_create(0,0,oDemoRecord);
 </string>
           </argument>
         </arguments>

@@ -135,10 +135,12 @@ alpha2 = !alpha2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with (other) if (sprite_index == sBlockStep || sprite_index == sBlockScrew || sprite_index == sBlockPBomb || sprite_index == sBlockMissile || sprite_index == sBlockSMissile || sprite_index == sBlockSpeed) {
+            <string>/*
+with (other) if (sprite_index == sBlockStep || sprite_index == sBlockScrew || sprite_index == sBlockPBomb || sprite_index == sBlockMissile || sprite_index == sBlockSMissile || sprite_index == sBlockSpeed) {
     event_user(1);
     visible = true;
 }
+testing a hunch.. */
 </string>
           </argument>
         </arguments>

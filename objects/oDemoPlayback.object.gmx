@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-4999999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,16 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>demo_valid = 1;
-demo_inputs = 0;
-
-demo_uppr = 0;
-demo_dnpr = 0;
-demo_rtpr = 0;
-demo_lfpr = 0;
-
-demo_frpr = 0;
-demo_jppr = 0;
+            <string>// settings
+// own player settings
+self_aimstyle = global.opaimstyle;
+self_misstyle = global.opmslstyle;
+self_morstyle = global.opmrpstyle;
+self_spistyle = global.opspdstyle;
+self_clistyle = global.opautoclimb;
+self_mo2style = global.opautomorph;
+// demo sets player settings
 </string>
           </argument>
         </arguments>
