@@ -1,4 +1,9 @@
 load_character_vars();
+if (instance_exists(oDemoRecord)){
+    with (oDemoRecord){
+        instance_destroy();
+    }
+}
 // set other vars outside of character_vars
 global.missiles = 0;
 global.maxmissiles = 1;

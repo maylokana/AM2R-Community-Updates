@@ -29,7 +29,10 @@
 global.tt_verr = 2;
 if (global.skip_mMenu == 1){ // skip to trial select
     room_change(trialselectroom,0);
-}else{ // perform conversion check
+}else{ // do launch things
+    // set name
+    global.playerhandle = "Player";
+    // perform conversion check
     if (directory_exists("stages/")){
         var file = file_find_first("stages/*.am2rials",0);
         if (file != ""){ // stages do exist!

@@ -1278,7 +1278,7 @@ if (room != rm_transition) {
 } // if (room != rm_transition)
 malpha = 1;
 fadedone = 0;
-if (room == rm_transition) fadedone = 1;
+if (room == rm_transition || room == trialclearroom) fadedone = 1;
 if (room == titleroom &amp;&amp; instance_exists(oPressStart)) {
     global.gamestarted = 0;
     if (os_type == os_android) os_powersave_enable(true);

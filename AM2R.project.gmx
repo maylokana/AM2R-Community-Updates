@@ -4380,6 +4380,7 @@
       <script>scripts\split_object_string.gml</script>
       <script>scripts\save_action.gml</script>
       <script>scripts\ds_grid_get_l.gml</script>
+      <script>scripts\save_demo.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

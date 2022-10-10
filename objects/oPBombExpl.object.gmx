@@ -140,7 +140,8 @@ with (other) if (sprite_index == sBlockStep || sprite_index == sBlockScrew || sp
     event_user(1);
     visible = true;
 }
-testing a hunch.. */
+so apparently THIS is what was causing the lag.
+and since it has no purpose because making blocks visible is broken.. */
 </string>
           </argument>
         </arguments>

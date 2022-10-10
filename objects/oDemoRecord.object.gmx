@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-4999999</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -77,7 +77,7 @@ demo_morp_press = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (demo_valid){
+            <string>if (demo_valid &amp;&amp; room == empty_room){
     /*
     if something is amiss, then invalidate the run because i'm
     not dealing with this mess
@@ -197,6 +197,11 @@ demo_morp_press = 0;
         }
         demo_morp_press = oControl.kMorph;
     }
+}
+
+// quick code to delete this when needed (i'll clean this up later)
+if (room == titleroom || room == trialselectroom){
+    instance_destroy();
 }
 </string>
           </argument>
