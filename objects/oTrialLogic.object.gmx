@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//global.clear = 0; ??????
+            <string>// probably important..
+global.waterlevel = 0;
+global.watertype = 0;
+
+//global.clear = 0; ??????
 visible = 0; // hide me!
 // initially triallogic will merely act as a spawn point but does more than that
 alarm[0] = 1; // alarm for spawning samus
@@ -36,10 +40,10 @@ timer = 0; // in tics
 // GENERATING THE LEVEL
 var consolidate = 0; // whether solid consolidation will occur
 // grid for making visuals later
-var grid = ds_grid_create(200,150);
+var grid = ds_grid_create(240,190);
 // grid for consolidation later
-var cnsl = ds_grid_create(200,150);
-ds_grid_set_region(cnsl,0,0,199,149,-1);
+var cnsl = ds_grid_create(240,190);
+ds_grid_set_region(cnsl,0,0,239,189,-1);
 // open the file yoinked from global.level_is
 var file = file_text_open_read("stages/"+global.level_is);
 // skip the first two strings
@@ -47,6 +51,8 @@ repeat (2){
     file_text_readln(file);
 }
 // get data for later
+global.sta_timestamp = file_text_read_real(file);
+file_text_readln(file);
 global.sta_name = file_text_read_string(file);
 file_text_readln(file);
 global.sta_auth = file_text_read_string(file);
@@ -65,8 +71,8 @@ file_text_readln(file);
 // objs
 while (!file_text_eof(file)){
     split_object_string(file_text_read_string(file));
-    var xx = real(s_part[0]);
-    var yy = real(s_part[1]);
+    var xx = real(s_part[0])+320;
+    var yy = real(s_part[1])+320;
     var ty = real(s_part[2]);
     file_text_readln(file);
     switch (ty){
@@ -179,6 +185,9 @@ while (!file_text_eof(file)){
             }
             ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
         break;
+        case 40:
+            instance_create(xx,yy,oTTWater);
+        break;
         // items
         case 14: // spiderball
             instance_create(xx,yy+16,oTTSpider);
@@ -234,14 +243,17 @@ while (!file_text_eof(file)){
         case 39: // spazer
             instance_create(xx,yy+16,oTTSBeam);
         break;
+        case 41: // gravity
+            instance_create(xx,yy+16,oTTGravSuit);
+        break;
     }
 }
 
 // solid merging code
 if (consolidate){
     while (1){
-        for (var i = 0; i &lt; 200; ++i;){
-            for (var v = 0; v &lt; 150; ++v;){
+        for (var i = 0; i &lt; 240; ++i;){
+            for (var v = 0; v &lt; 190; ++v;){
                 if (ds_grid_get(cnsl,i,v) != -1){
                     // x check
                     var x_o = 0;
@@ -311,8 +323,8 @@ if (consolidate){
 ds_grid_destroy(cnsl);
 
 // now make visuals off of the grid
-for (var i = 0; i &lt; 200; ++i;){
-    for (var v = 0; v &lt; 150; ++v;){
+for (var i = 0; i &lt; 240; ++i;){
+    for (var v = 0; v &lt; 190; ++v;){
         switch (ds_grid_get(grid,i,v)){
             case 1:
                 tile_add(tlTimeTrial,0,0,16,16,i*16,v*16,-100);

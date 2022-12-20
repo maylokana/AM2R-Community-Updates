@@ -14,6 +14,7 @@ if (load != ""){
         file_text_readln(file);
         if (real(file_text_read_string(file)) > global.tt_verr) then version_incomp = 1;
         file_text_readln(file);
+        file_text_readln(file);
 
         // strings
         stage_name = file_text_read_string(file);

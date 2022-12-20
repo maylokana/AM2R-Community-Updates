@@ -92,6 +92,9 @@ oTrialEditor.lockout = 1;
 // i'll figure this out later
 
 if (type_mode != -1){
+    // limit keyboard_string
+    keyboard_string = string_replace_all(keyboard_string,"#","");
+    if (string_length(keyboard_string) &gt; 40) keyboard_string = string_delete(keyboard_string,41,1);
     if (type_mode == 0){ // name
         oTrialEditor.stage_name = keyboard_string;
     }else{ // author

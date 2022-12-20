@@ -1,5 +1,7 @@
 /// draw_map_surf(x, y)
 // leaks all variables, repositions calling instance..?
+// a crash was reported for this, and since the map is never used i'll just..
+/*
 x = (argument0 - 3) * 8;
 y = (argument1 - 3) * 8;
 mystr = string(global.map[argument0, argument1]);
@@ -13,3 +15,5 @@ if (mystr != "0") {
     corner = string_char_at(mystr, 7);
     draw_mapblock(x, y, wallU, wallR, wallD, wallL, color, special, global.dmap[argument0, argument1], corner);
 }
+lol
+*/

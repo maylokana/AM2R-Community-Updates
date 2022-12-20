@@ -1289,6 +1289,7 @@
       <sound>sound\musTrialsWin</sound>
       <sound>sound\musTrialsNewPB</sound>
       <sound>sound\musTrialsPlay</sound>
+      <sound>sound\musFanfareFast</sound>
     </sounds>
     <sounds name="A4">
       <sound>sound\sndA4AlarmLoop</sound>
@@ -4381,6 +4382,8 @@
       <script>scripts\save_action.gml</script>
       <script>scripts\ds_grid_get_l.gml</script>
       <script>scripts\save_demo.gml</script>
+      <script>scripts\make_datetime.gml</script>
+      <script>scripts\get_datetime.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -5181,6 +5184,7 @@
       <object>objects\oOptionsDisplay</object>
       <object>objects\oOptionsSound</object>
       <object>objects\oOptionsControl</object>
+      <object>objects\oOptionsTrials</object>
       <object>objects\oOptionsKeyboard</object>
       <object>objects\oOptionsJoypad</object>
       <object>objects\oOptionsXJoypad</object>
@@ -5430,6 +5434,7 @@
       <object>objects\oTrialSelect</object>
       <object>objects\oTrialClear</object>
       <object>objects\oTrialReset</object>
+      <object>objects\oTrialEntry</object>
       <object>objects\oTrialGoal</object>
       <object>objects\oTrialLogic</object>
       <object>objects\oTrialAutoad</object>
@@ -5448,6 +5453,7 @@
       <object>objects\oTTEnergy</object>
       <object>objects\oTTPower</object>
       <object>objects\oTTSpider</object>
+      <object>objects\oTTGravSuit</object>
       <object>objects\oTTSuper</object>
       <object>objects\oSkipMain</object>
       <object>objects\oTrialEditor</object>
@@ -5462,6 +5468,7 @@
       <object>objects\oDemoPlayback</object>
       <object>objects\oTTAmmoField</object>
       <object>objects\oTTHealField</object>
+      <object>objects\oTTWater</object>
     </objects>
   </objects>
   <timelines name="timelines">

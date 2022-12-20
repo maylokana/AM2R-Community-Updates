@@ -1251,7 +1251,7 @@ if (room != rm_transition) {
     if (global.ingame == 1 &amp;&amp; instance_number(oCharacter) == 0) {
         player = instance_create(global.save_x, global.save_y, oCharacter);
         with (player) juststarted = 100;
-        mus_intro_fanfare();
+        //mus_intro_fanfare(); moved to charactercreateevent...
     }
     if (global.ingame == 1) {
         room_persistent = false;

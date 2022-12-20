@@ -98,6 +98,7 @@ if (mouse_check_button(mb_left)){
    var xx = floor(mouse_x/16)*16;
    var yy = floor(mouse_y/16)*16;
    if (xx &lt; 0 || xx &gt; room_width-1) then exit; // anti-widescreen lockout
+   if (yy &lt; 0 || yy &gt; room_height-1) then exit; // another lockout for vertical stuff
    var no_multi = 0;
    if (solid_place == 11 || solid_place == 14 || solid_place == 15 || solid_place == 16 || solid_place == 17 || solid_place == 18 || solid_place == 22 || solid_place == 23 || solid_place == 34 || solid_place == 35 || solid_place == 37 || solid_place == 38 || solid_place == 39){
         no_multi = 1;
@@ -359,6 +360,14 @@ if (relay_button &gt; -1){
         case 52:
             editor_message("Selected Spazer Beam");
             solid_place = 39;
+        break;
+        case 53:
+            editor_message("Selected Water Line");
+            solid_place = 40;
+        break;
+        case 54:
+            editor_message("Selected Gravity Suit");
+            solid_place = 41;
         break;
         default:
             // not much to say so fun fact! smart tab is terrible

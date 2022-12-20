@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,18 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>oControl.ingame = 0;
-sfx_stop_all();
-sfx_play(sndMessage);
-mus_change(musTrialsWin);
-
-_hue = 0;
-_stx = 0;
-
-trial_state = 0;
-if (oDemoRecord.demo_valid == 0) then trial_state = 2;
-
-option = 0;
+            <string>keyboard_string = "";
 </string>
           </argument>
         </arguments>
@@ -59,40 +48,13 @@ option = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oControl.kRightPressed){
-    sfx_play(sndMenuMove);
-    ++option;
-    if (option &gt; 2) then option = 0;
+            <string>if (string_length(keyboard_string) &gt; 40) string_delete(keyboard_string,41,1);
+keyboard_string = string_replace_all(keyboard_string,"#","");
+if (keyboard_check_pressed(vk_enter)){
+    global.playerhandle = keyboard_string;
+    save_gameoptions();
+    instance_destroy();
 }
-
-if (oControl.kLeftPressed){
-    sfx_play(sndMenuMove);
-    --option;
-    if (option &lt; 0) then option = 2;
-}
-
-if (oControl.kMenu1Pressed){
-    switch (option){
-        case 0:
-            audio_stop_all();
-            start_trial();
-        break;
-        case 1:
-            //save_demo();
-        break;
-        case 2:
-            audio_stop_all();
-            room_change(trialselectroom,1);
-        break;
-    }
-    sfx_play(sndMenuSel);
-}
-
-_hue += 0.33;
-if (_hue &gt; 255) then _hue -= 255;
-
-_stx += 0.25;
-if (_stx &gt; 240) then _stx -= 240;
 </string>
           </argument>
         </arguments>
@@ -115,54 +77,15 @@ if (_stx &gt; 240) then _stx -= 240;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(1);
-draw_sprite(global.frame,0,-(oControl.widescreen*53),0); // test
-
-// set up
-draw_set_halign(fa_center);
-
-// goal strips (oh wow these are so unoptimized! anyway)
-draw_sprite(sGoalStrip,0,60+_stx,0);
-draw_sprite(sGoalStrip,0,(-420)+_stx,0);
-
-draw_sprite(sGoalStrip,0,(-60)-_stx,200);
-draw_sprite(sGoalStrip,0,420-_stx,200);
-
-// dark bg
-draw_set_alpha(0.33);
+            <string>draw_set_alpha(0.67);
 draw_set_color(c_black);
-draw_rectangle(-60,0,480,240,false);
-
+draw_rectangle(-100,0,500,240,false);
 draw_set_alpha(1);
-// text
-draw_set_font(fontGUIDefault);
-draw_set_color(c_black);
-draw_text(165,125,"GOAL!");
-draw_set_color(make_color_hsv(_hue,170,255));
-draw_text(160,120,"GOAL!");
 draw_set_color(c_white);
-draw_set_font(fontMenuTinyDefault);
-draw_text_border(160,198,"Completed level in "+time_string(global.end_time));
-draw_text_border(160,208,global.sta_name+" by "+global.sta_auth);
+draw_set_halign(fa_center);
 draw_set_font(fontGUI2Default);
-if (option == 0){
-    draw_text_border(70,222,"&gt; Restart &lt;");
-}else{
-    draw_text_border(70,222,"Restart");
-}
-var demo_name = "Save Demo";
-if (trial_state == 1) then demo_name = "Saved Demo";
-if (trial_state == 2) then demo_name = "Invalid Demo";
-if (option == 1){
-    draw_text_border(160,222,"&gt; "+demo_name+" &lt;");
-}else{
-    draw_text_border(160,222,demo_name);
-}
-if (option == 2){
-    draw_text_border(250,222,"&gt; Exit Level &lt;");
-}else{
-    draw_text_border(250,222,"Exit Level");
-}
+draw_text_border(160,110,"Please enter your name.");
+draw_text_border(160,130,keyboard_string+"_");
 </string>
           </argument>
         </arguments>

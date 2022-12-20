@@ -9,6 +9,7 @@ global.missiles = 0;
 global.maxmissiles = 1;
 global.ingame = 1; // set global as "ingame"
 oControl.mod_IGT = 0; // it won't leave me alone
+oControl.mod_fusion = global.suitstyle;
 // this is a mess of vars
 global.save_x = 1;
 global.save_y = 1;

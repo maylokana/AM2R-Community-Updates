@@ -27,6 +27,8 @@ global.opwritelog = 0;
 global.compatibilitymode = 0;
 global.sensitivitymode = 0;
 global.widescreen_enabled = 1;
+global.suitstyle = 0;
+global.playerhandle = "";
 oControl.mod_insanitymode = 0;
 oControl.touch_scale = 4;
 oControl.mod_collecteditemsmap = 0;
@@ -163,7 +165,11 @@ if (file_exists("config.ini")) {
         oControl.mod_septoggs_bombjumps_easy = 1;
         oControl.mod_septoggs_hijump_easy = 0;
     }
-    
+
+    // Time Trials
+    global.suitstyle = ini_read_real("Time Trials","SuitStyle",0);
+    global.playerhandle = ini_read_string("Time Trials","Handle","");
+
     ini_close();
 } // if (file_exists("config.ini"))
 apply_screenres();

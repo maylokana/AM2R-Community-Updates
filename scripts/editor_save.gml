@@ -22,6 +22,8 @@ file_text_write_string(file,"==== AM2R TIME TRIALS ===="); // header
 file_text_writeln(file);
 file_text_write_string(file,string(global.tt_verr)) // version number
 file_text_writeln(file);
+file_text_write_string(file,make_datetime(date_current_datetime()))// datetime
+file_text_writeln(file);
 file_text_write_string(file,stage_name); // stage name
 file_text_writeln(file);
 file_text_write_string(file,stage_auth); // stage auth

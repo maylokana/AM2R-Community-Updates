@@ -79,6 +79,10 @@ ini_write_real("Extras", "FusionSuitMSR", oControl.msr_fusionsuit);
 ini_write_real("Extras", "ExtremeLabMonsters", oControl.mod_monstersextremecheck);
 ini_write_real("Extras", "DisplayIGT", oControl.mod_IGT);
 
+// Time Trials
+ini_write_string("Time Trials","Handle",global.playerhandle);
+ini_write_real("Time Trials","SuitStyle",global.suitstyle);
+
 // Android
 ini_write_real("Control", "JoystickDPadUp", global.opjoybtn_padu);
 ini_write_real("Control", "JoystickDPadDown", global.opjoybtn_padd);

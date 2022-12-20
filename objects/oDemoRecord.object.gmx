@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>demo_valid = 1;
+            <string>demo_valid = 0;
 demo_actions = 0;
 
 demo_action[0] = -1;
@@ -86,6 +86,7 @@ demo_morp_press = 0;
         demo_valid = 0;
     }
 
+    if (global.enablecontrol){
     ++demo_tick;
     
     // inputs time!
@@ -197,6 +198,7 @@ demo_morp_press = 0;
         }
         demo_morp_press = oControl.kMorph;
     }
+    }
 }
 
 // quick code to delete this when needed (i'll clean this up later)
@@ -225,7 +227,8 @@ if (room == titleroom || room == trialselectroom){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var _x = view_xview[0];
+            <string>/* debug stuff. don't worry about it!
+var _x = view_xview[0];
 var _y = view_yview[0];
 
 draw_set_alpha(1);
@@ -239,6 +242,7 @@ if (demo_actions){
 }
 draw_set_color(c_red);
 if (!demo_valid) then draw_text_border((16+_x)-oControl.widescreen*53,36+_y,"Demo invalid lmao");
+*/
 </string>
           </argument>
         </arguments>

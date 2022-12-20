@@ -66,4 +66,46 @@ if (ver_num < 2){ // v0.1/v0.2 conversions
     file_text_close(file2); // overwrite file1 with file2
 }
 
+if (ver_num < 3){
+    var file1 = file_text_open_read("stages/"+argument0); // read file (for file 2)
+    var file2 = file_text_open_write("stages/"+argument0); // write file
+
+    // do the boring stuff
+    file_text_readln(file1);
+    file_text_readln(file1);
+    var name = file_text_read_string(file1);
+    file_text_readln(file1);
+    var auth = file_text_read_string(file1);
+    file_text_readln(file1);
+    var sta_id = file_text_read_string(file1);
+    file_text_readln(file1);
+    var obj_hide = file_text_read_string(file1);
+    file_text_readln(file1);
+    file_text_write_string(file2,"==== AM2R TIME TRIALS ====");
+    file_text_writeln(file2);
+    file_text_write_string(file2,"3");
+    file_text_writeln(file2);
+    // here's why we're here
+    file_text_write_string(file2,make_datetime(date_current_datetime()));
+    file_text_writeln(file2);
+    // carry on..
+    file_text_write_string(file2,name);
+    file_text_writeln(file2);
+    file_text_write_string(file2,auth);
+    file_text_writeln(file2);
+    file_text_write_string(file2,sta_id);
+    file_text_writeln(file2);
+    file_text_write_string(file2,obj_hide);
+    file_text_writeln(file2);
+    // convert everything else over
+    while (!file_text_eof(file1)){
+        file_text_write_string(file2,file_text_read_string(file1));
+        file_text_writeln(file2);
+        file_text_readln(file1);
+    }
+
+    file_text_close(file1); // close file1
+    file_text_close(file2); // overwrite file1 with file2
+}
+
 //show_debug_message("Conversion complete");

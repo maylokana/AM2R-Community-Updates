@@ -185,7 +185,8 @@ if (instance_exists(op4)) with (op4) instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>op1 = instance_create(x, y, oPauseOption);
+            <string>y -= 8;
+op1 = instance_create(x, y, oPauseOption);
 op1.optionid = 0;
 op1.label = get_text("PauseMenu", "Resume");
 op2 = instance_create(x, y + 16, oPauseOption);

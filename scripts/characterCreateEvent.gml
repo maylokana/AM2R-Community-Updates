@@ -251,7 +251,11 @@ flyJumpsTimer = 0;
 flyJumpWasPressed = 0;
 makeActive();
 global.enablecontrol = 0;
-if (1) {
+if (global.first_start){
     alarm[3] = 300;
-} else alarm[3] = 1;
+}else{
+    alarm[3] = 120;
+}
+mus_intro_fanfare();
+global.first_start = 0;
 empspark = -4;

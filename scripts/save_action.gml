@@ -33,4 +33,4 @@ demo_action[@ demo_actions] = argument0;
 demo_acttic[@ demo_actions] = demo_tick;
 
 ++demo_actions;
-show_debug_message("Saved action no. "+string(demo_actions)+": Action "+string(demo_action[@ demo_actions-1])+" at tic "+string(demo_acttic[@ demo_actions-1]))
+//show_debug_message("Saved action no. "+string(demo_actions)+": Action "+string(demo_action[@ demo_actions-1])+" at tic "+string(demo_acttic[@ demo_actions-1]))

@@ -361,7 +361,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!sfx_isplaying(musFanfare)) {
+            <string>if ((!sfx_isplaying(musFanfare)) &amp;&amp; (!sfx_isplaying(musFanfareFast))) {
     if (!sfx_isplaying(currentbgm)) {
         mus_current_fadein();
         alarm[0] = 10;

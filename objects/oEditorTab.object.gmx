@@ -95,7 +95,7 @@ create_button(-185,64,50,12,3,"Exit",0,c_red);
 if (tab_data){ // page 2
 // obj buttons
 create_button(-142,29,24,24,29,"",sHealField,c_white); // heal tiles
-//create_button(-112,29,24,24,30,"",sSolid,c_white);
+create_button(-112,29,24,24,53,"",sIceShard,c_white);
 //create_button(-82,29,24,24,31,"",sSlope1,c_white);
 //create_button(-52,29,24,24,32,"",sSlope2,c_white);
 create_button(-22,29,24,24,33,"",sBlockStep,c_red);
@@ -115,7 +115,7 @@ create_button(-22,57,24,24,45,"",sItemMorphBall,c_white);
 create_button(8,57,24,24,46,"",sItemPowergrip,c_white);
 create_button(38,57,24,24,47,"",sItemEnergyTank,c_white);
 //create_button(68,57,24,24,48,"",sItemChargeBeam,c_white);
-//create_button(98,57,24,24,49,"",sItemWaveBeam,c_white);
+create_button(98,57,24,24,54,"",sItemGravitySuit,c_white);
 create_button(128,57,24,24,50,"",sItemChargeBeam,c_white);
 create_button(158,57,24,24,51,"",sItemWaveBeam,c_white);
 create_button(188,57,24,24,52,"",sItemSpazerBeam,c_white);

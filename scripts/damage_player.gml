@@ -1,4 +1,5 @@
 /// damage_player(damage, knockback_x, knockback_y, ignore_armor, ignore_invincibility)
+argument3 = 1; // because i'm lazy..
 var damage_taken;
 if (global.currentsuit == 0 || argument3 == 1) damage_taken = argument0 * oControl.mod_diffmult; //((global.difficulty == 2) + 1) * oControl.mod_fusion;
 if (argument3 == 0) {

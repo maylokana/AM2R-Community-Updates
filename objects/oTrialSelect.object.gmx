@@ -32,6 +32,7 @@ i'll live my life how i want to */
 draw_set_valign(fa_top);
 audio_stop_sound(musTitle); // a fix so that the og main menu theme stops playing
 
+global.first_start = 1; // this var is for trial starting
 scroll_x = 0; // background scrolling
 cursor_blink = 0; // the visual cursor blinking
 // cursor nudges used on the main menu
@@ -39,6 +40,14 @@ nudge_x = 0;
 nudge_y = 0;
 
 flavor_text = "Flavor text goes here"; // flavor_text used on the bottom of the screen
+funny_text = choose(
+    "Create, share, play",
+    "More AM2R for everyone!",
+    "Will have enemies when v2.0 drops",
+    "Kaizo-level generator",
+    "Now featuring slope cannons",
+    ":)",
+);
 
 active = 1; // whether the menus are active
 
@@ -71,6 +80,11 @@ THIS ISN'T IMPORTANT ANYMORE
 set_map_info("Test Room",0,"Delving into the code was a mistake",map0,-1);
 set_map_info("First Steps",1,"Everyone has to start somewhere, right?",map1,-1);
 set_map_info("The Tower",4,"Don't fall, that's not good for you",the_tower,-1);
+
+// if the handle isn't set, ask the player to set one
+if (global.playerhandle = ""){
+    instance_create(0,0,oTrialEntry);
+}
 </string>
           </argument>
         </arguments>
@@ -109,6 +123,8 @@ if (abs(nudge_y) &gt; 0){
    if (abs(nudge_y) &lt; 0.01) then nudge_y = 0;
 }
 
+// if there's an oTrialEntry don't register anything
+if (!instance_exists(oTrialEntry)){
 // all the menu stuffs
 if (active){
 switch (cat){
@@ -294,6 +310,7 @@ case 3:
 break;
 }
 }
+}
 // flavor_textinator
 flavor_text = "";
 switch (cat){
@@ -401,8 +418,9 @@ draw_set_color(c_white);
 
 // title
 draw_set_halign(fa_center);
-draw_text_border(160,5,"AM2R: Time Trials");
-draw_text_border(160,15,"(this is a placeholder)");
+draw_background_ext(bgAM2RTitle,160-56,-5,0.5,0.5,0,c_white,1);
+// "funny text" on the top
+draw_text_border(160,28,funny_text);
 
 /* align test
 draw_set_halign(fa_left);
@@ -428,23 +446,27 @@ var cx = 160+nudge_x;
 var cy = 120+nudge_y;
 if (oControl.widescreen){
 cursor_blinking(sel,0);
-draw_sprite_ext(sTTButton169,0,cx-100,cy-30,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton169,0,cx-100,cy-25,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,1);
-draw_sprite_ext(sTTButton169,1,cx+100,cy-30,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton169,1,cx+100,cy-25,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,2);
-draw_sprite_ext(sTTButton169,2,cx-100,cy+72,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton169,2,cx-100,cy+77,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,3);
-draw_sprite_ext(sTTButton169,3,cx+100,cy+72,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton169,3,cx+100,cy+77,1,1,0,draw_get_color(),1);
 }else{// 4:3 buttons
 cursor_blinking(sel,0);
-draw_sprite_ext(sTTButton43,0,cx-75,cy-30,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton43,0,cx-75,cy-25,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,1);
-draw_sprite_ext(sTTButton43,1,cx+75,cy-30,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton43,1,cx+75,cy-25,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,2);
-draw_sprite_ext(sTTButton43,2,cx-75,cy+72,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton43,2,cx-75,cy+77,1,1,0,draw_get_color(),1);
 cursor_blinking(sel,3);
-draw_sprite_ext(sTTButton43,3,cx+75,cy+72,1,1,0,draw_get_color(),1);
+draw_sprite_ext(sTTButton43,3,cx+75,cy+77,1,1,0,draw_get_color(),1);
 }
+// mod info on the bottom
+draw_set_color(c_ltgray);
+draw_set_font(fontMenuTinyDefault);
+draw_text_border(160,214,"This is a mod by maylokana. Thank you for playing!");
 break;
 case 1: // course select (defunct)
 for (var r1 = 0; r1 &lt; available_maps; ++r1){
@@ -467,7 +489,7 @@ case 2: // new course select
     draw_set_font(fontGUI2Default);
     draw_set_halign(fa_center);
     draw_set_color(c_white);
-    draw_text_border(160,30,string(custom_levels)+" levels found");
+    //draw_text_border(160,30,string(custom_levels)+" levels found");
     if (custom_levels){
         /*an idea... make fake pages
         this certainly wasn't designed for this but... i can clean it up later
@@ -478,15 +500,15 @@ case 2: // new course select
         for (var i = 0+(push*16); i &lt; 16+(push*16) ++i;){
             if (i &lt; custom_levels){
                 if (sel == i){
-                    draw_text_border(20,45+((i-(push*16))*10),"&gt; "+custom_level_name[i]);
+                    draw_text_border(20-(oControl.widescreen*53),37+((i-(push*16))*10),"&gt; "+custom_level_name[i]);
                 }else{
-                    draw_text_border(20,45+((i-(push*16))*10),""+custom_level_name[i]);
+                    draw_text_border(20-(oControl.widescreen*53),37+((i-(push*16))*10),""+custom_level_name[i]);
                 }
             }
         }
         draw_set_font(fontMenuTinyDefault);
         draw_set_halign(fa_right);
-        draw_text_border(300,195,"Creator: "+custom_level_auth[sel]);
+        draw_text_border(300+(oControl.widescreen*53),195,"Creator: "+custom_level_auth[sel]);
         draw_set_font(fontGUI2Default);
         draw_set_halign(fa_center);
         draw_text_border(160-80,215,string(sel+1)+"/"+string(custom_levels));
