@@ -2439,3 +2439,9 @@ if (onfire > 0) onfire -= 1;
 if (ballbounce > 0) ballbounce -= 1;
 statetime += 1;
 if (state != IDLE && state != SAVING && state != SAVINGFX && state != SAVINGSHIP && state != SAVINGSHIPFX) global.gametime += 1;
+
+// WHAT IS THE STATE MACHINE
+if (state == RESPAWN){
+    xVel = 0;
+    yVel = 0;
+}

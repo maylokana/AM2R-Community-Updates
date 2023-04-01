@@ -749,6 +749,7 @@ if (global.ingame == 1) {
             if (global.playerhealth &lt; 50) hpalarm = 2;
             if (global.playerhealth &lt; 25) hpalarm = 3;
         }
+        if (global.playerhealth == 0) hpalarm = 0; // no reason to warn if i'm dead!
     }
     else
     {

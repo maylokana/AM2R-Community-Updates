@@ -25,26 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.tt_vers = "v2.0";
-global.tt_verr = 3;
-if (global.skip_mMenu == 1){ // skip to trial select
-    room_change(trialselectroom,0);
-}else{ // do launch things
-    // set timezone to utc
-    date_set_timezone(timezone_utc);
-    // perform conversion check
-    if (directory_exists("stages/")){
-        var file = file_find_first("stages/*.am2rials",0);
-        if (file != ""){ // stages do exist!
-            convert_level(file);
-            var file = file_find_next();
-            while (file != ""){
-                convert_level(file);
-                var file = file_find_next();
-            }
-        }
-    }
-}
+            <string>myOffset = 0; // we will lerp this later for the "now playing" text
+
+gridLookup = ds_grid_create(3,20); // this is going to be really scuffed but w/e i don't care
+
+// set audiofiles and their metadata through script because i'm lazy
+audio_metadata(0,musTrialsMenu,"Phantom Avenger","Menu (Hunters)");
 </string>
           </argument>
         </arguments>

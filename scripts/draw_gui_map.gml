@@ -31,19 +31,31 @@ if (global.mapmarker) {
     if (oControl.moffy > 1 && oControl.moffx < -2) draw_sprite_ext(sHUDMapMarkB, oControl.markfr, argument0 + 8, argument1 + 28, -1, -1, 0, -1, 1);
 }
 */
-draw_set_font(fontGUI2Default);
+draw_set_font(fontGUITrials);
 // clock
-draw_timer(argument0,argument1);
+draw_set_color(c_gray);
+if (oTrialLogic.timer_started == 1) then draw_set_color(c_white);
+draw_set_halign(fa_right);
+draw_text_border(argument0+5,argument1+3,time_string(oTrialLogic.timer));
 // speedometer
 draw_set_color(c_white);
 draw_set_halign(fa_right);
 var sp = abs(round(oCharacter.xVel*100));
 draw_text_border(argument0+5,argument1+13,string(sp));
+// speedboost (rainbow if 100)
 var sb = round(oCharacter.speedboost_steps/1.1);
-if (sb > 100) then sb = 100;
+if (sb >= 100){
+    sb = 100;
+    draw_set_color(make_color_hsv((oTrialLogic.timer*9) % 255,180,240));
+}
 if (oCharacter.speedboost == 1) then sb = 100;
 draw_text_border(argument0+5,argument1+23,string(sb));
 draw_set_halign(fa_left);
+draw_set_color(c_white);
 draw_text_border(argument0+10,argument1+3,"TIME");
-draw_text_border(argument0+10,argument1+13,"f/s");
+draw_text_border(argument0+10,argument1+13,"F/s");
+// do the same check here because i'm too lazy to do something better
+if (sb >= 100){
+    draw_set_color(make_color_hsv((oTrialLogic.timer*9) % 255,180,240));
+}
 draw_text_border(argument0+10,argument1+23,"%");

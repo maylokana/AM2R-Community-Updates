@@ -3412,6 +3412,8 @@
       <sprite>sprites\sHealField</sprite>
       <sprite>sprites\sAmmoField</sprite>
       <sprite>sprites\sStaticLabel</sprite>
+      <sprite>sprites\sCheckField</sprite>
+      <sprite>sprites\sTTButtonNew</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -4384,6 +4386,8 @@
       <script>scripts\save_demo.gml</script>
       <script>scripts\make_datetime.gml</script>
       <script>scripts\get_datetime.gml</script>
+      <script>scripts\audio_metadata.gml</script>
+      <script>scripts\if_else.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -4399,6 +4403,8 @@
     <font>fonts\fontMenuTinyDefault</font>
     <font>fonts\fontMenuSmall2Default</font>
     <font>fonts\fontSubScrDefault</font>
+    <font>fonts\fontGUITrials</font>
+    <font>fonts\fontGUI2Trials</font>
   </fonts>
   <objects name="objects">
     <objects name="Test">
@@ -5469,6 +5475,8 @@
       <object>objects\oTTAmmoField</object>
       <object>objects\oTTHealField</object>
       <object>objects\oTTWater</object>
+      <object>objects\oTTDeathSequence</object>
+      <object>objects\oNowPlaying</object>
     </objects>
   </objects>
   <timelines name="timelines">

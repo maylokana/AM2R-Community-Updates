@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// probably important..
+            <string>isAprilFoolsGeneration = false;
+// probably important..
 global.waterlevel = 0;
 global.watertype = 0;
 
@@ -75,177 +76,360 @@ while (!file_text_eof(file)){
     var yy = real(s_part[1])+320;
     var ty = real(s_part[2]);
     file_text_readln(file);
-    switch (ty){
-        case 0: // normal solid
-            if (!consolidate) then instance_create(xx,yy,oSolid1);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
-            ds_grid_set(cnsl,floor(xx/16),floor(yy/16),0);
-        break;
-        case 1: // slope 1
-            instance_create(xx,yy,oSlope1);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),2);
-        break;
-        case 2: // slope 2
-            instance_create(xx,yy,oSlope2);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),3);
-        break;
-        case 3: // crack block
-            instance_create(xx,yy,oBlockStep);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 4: // beamblock
-            instance_create(xx,yy,oBlockShoot);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 5: // bombblock
-            instance_create(xx,yy,oBlockBomb);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 6: // missileblock
-            instance_create(xx,yy,oBlockMissile);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 7: // superblock
-            instance_create(xx,yy,oBlockSMissile);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 8: // pbombblock
-            instance_create(xx,yy,oBlockPBomb);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 9: // screwblock
-            instance_create(xx,yy,oBlockScrew);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 10: // speedblock
-            instance_create(xx,yy,oBlockSpeed);
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 25: // crack block
-            with (instance_create(xx,yy,oBlockStep)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 26: // beamblock
-            with (instance_create(xx,yy,oBlockShoot)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 27: // bombblock
-            with (instance_create(xx,yy,oBlockBomb)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 28: // missileblock
-            with (instance_create(xx,yy,oBlockMissile)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 29: // superblock
-            with (instance_create(xx,yy,oBlockSMissile)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 30: // pbombblock
-            with (instance_create(xx,yy,oBlockPBomb)){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 31: // screwblock
-            with instance_create(xx,yy,oBlockScrew){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 32: // speedblock
-            with instance_create(xx,yy,oBlockSpeed){
-                regentime = -1;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
-        break;
-        case 11: // spawn. also for filling grid
-            x = xx+8;
-            y = yy+16;
-            var s_x = x;
-            var s_y = y-8;
-        break;
-        case 12: // FREEDOM
-            instance_create(xx,yy,oTrialGoal);
-        break;
-        case 13: // spikes
-            with (instance_create(xx+2,yy+2,oSpikes4)){
-                image_xscale = 0.75;
-                image_yscale = 0.75;
-            }
-            ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
-        break;
-        case 40:
-            instance_create(xx,yy,oTTWater);
-        break;
-        // items
-        case 14: // spiderball
-            instance_create(xx,yy+16,oTTSpider);
-        break;
-        case 15: // jumpball
-            instance_create(xx,yy+16,oTTSpring);
-        break;
-        case 16: // hijump
-            instance_create(xx,yy+16,oTTHijump);
-        break;
-        case 17: // spacejump
-            instance_create(xx,yy+16,oTTSpace);
-        break;
-        case 18: // bombs
-            instance_create(xx,yy+16,oTTBomb);
-        break;
-        case 19: // missile
-            instance_create(xx,yy+16,oTTMissile);
-        break;
-        case 20: // super
-            instance_create(xx,yy+16,oTTSuper);
-        break;
-        case 21: // power
-            instance_create(xx,yy+16,oTTPower);
-        break;
-        case 22: // screw
-            instance_create(xx,yy+16,oTTScrew);
-        break;
-        case 23: // speed
-            instance_create(xx,yy+16,oTTBooster);
-        break;
-        case 34: // morph
-            instance_create(xx,yy+16,oTTMorph);
-        break;
-        case 35: // pgrip
-            instance_create(xx,yy+16,oTTPGrip);
-        break;
-        case 24: // heal
-            instance_create(xx,yy,oTTHealField);
-        break;
-        case 33: // ammo
-            instance_create(xx,yy,oTTAmmoField);
-        break;
-        case 36: // etank
-            instance_create(xx,yy+16,oTTEnergy);
-        break;
-        case 37: // charge
-            instance_create(xx,yy+16,oTTCBeam);
-        break;
-        case 38: // wave
-            instance_create(xx,yy+16,oTTWBeam);
-        break;
-        case 39: // spazer
-            instance_create(xx,yy+16,oTTSBeam);
-        break;
-        case 41: // gravity
-            instance_create(xx,yy+16,oTTGravSuit);
-        break;
+    if (isAprilFoolsGeneration){
+        switch (ty){
+            case 0: // normal solid
+                if (!consolidate) then instance_create(xx,yy,oSolid1);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
+                ds_grid_set(cnsl,floor(xx/16),floor(yy/16),0);
+            break;
+            case 1: // slope 1
+                instance_create(xx,yy,oSlope1);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),2);
+            break;
+            case 2: // slope 2
+                instance_create(xx,yy,oSlope2);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),3);
+            break;
+            case 3: // crack block
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 4: // beamblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 5: // bombblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 6: // missileblock
+                instance_create(xx,yy,oBlockMissile);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 7: // superblock
+                instance_create(xx,yy,oBlockSMissile);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 8: // pbombblock
+                instance_create(xx,yy,oBlockPBomb);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 9: // screwblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 10: // speedblock
+                instance_create(xx,yy,oBlockSpeed);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 25: // crack block
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 26: // beamblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 27: // bombblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 28: // missileblock
+                with (instance_create(xx,yy,oBlockMissile)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 29: // superblock
+                with (instance_create(xx,yy,oBlockSMissile)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 30: // pbombblock
+                with (instance_create(xx,yy,oBlockPBomb)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 31: // screwblock
+                with (instance_create(xx+9,yy,oHornoad)){
+                    facing = choose(-1,1);
+                    timer = irandom_range(95,110);
+                }
+            break;
+            case 32: // speedblock
+                with instance_create(xx,yy,oBlockSpeed){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 11: // spawn. also for filling grid
+                x = xx+8;
+                y = yy+16;
+                var s_x = x;
+                var s_y = y-8;
+            break;
+            case 12: // FREEDOM
+                instance_create(xx,yy,oTrialGoal);
+            break;
+            case 13: // spikes
+                with (instance_create(xx+2,yy+2,oSpikes4)){
+                    image_xscale = 0.75;
+                    image_yscale = 0.75;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
+            break;
+            case 40:
+                instance_create(xx,yy,oTTWater);
+            break;
+            // items
+            case 14: // spiderball
+                instance_create(xx,yy+16,oTTSpider);
+            break;
+            case 15: // jumpball
+                instance_create(xx,yy+16,oTTSpring);
+            break;
+            case 16: // hijump
+                instance_create(xx,yy+16,oTTHijump);
+            break;
+            case 17: // spacejump
+                instance_create(xx,yy+16,oTTSpace);
+            break;
+            case 18: // bombs
+                instance_create(xx,yy+16,oTTBomb);
+            break;
+            case 19: // missile
+                instance_create(xx,yy+16,oTTMissile);
+            break;
+            case 20: // super
+                instance_create(xx,yy+16,oTTSuper);
+            break;
+            case 21: // power
+                instance_create(xx,yy+16,oTTPower);
+            break;
+            case 22: // screw
+                instance_create(xx,yy+16,oTTScrew);
+            break;
+            case 23: // speed
+                instance_create(xx,yy+16,oTTBooster);
+            break;
+            case 34: // morph
+                instance_create(xx,yy+16,oTTMorph);
+            break;
+            case 35: // pgrip
+                instance_create(xx,yy+16,oTTPGrip);
+            break;
+            case 24: // heal
+                instance_create(xx,yy,oTTHealField);
+            break;
+            case 33: // ammo
+                instance_create(xx,yy,oTTAmmoField);
+            break;
+            case 36: // etank
+                instance_create(xx,yy+16,oTTEnergy);
+            break;
+            case 37: // charge
+                instance_create(xx,yy+16,oTTCBeam);
+            break;
+            case 38: // wave
+                instance_create(xx,yy+16,oTTWBeam);
+            break;
+            case 39: // spazer
+                instance_create(xx,yy+16,oTTSBeam);
+            break;
+            case 41: // gravity
+                instance_create(xx,yy+16,oTTGravSuit);
+            break;
+        }
+    }else{
+        switch (ty){
+            case 0: // normal solid
+                if (!consolidate) then instance_create(xx,yy,oSolid1);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),1);
+                ds_grid_set(cnsl,floor(xx/16),floor(yy/16),0);
+            break;
+            case 1: // slope 1
+                instance_create(xx,yy,oSlope1);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),2);
+            break;
+            case 2: // slope 2
+                instance_create(xx,yy,oSlope2);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),3);
+            break;
+            case 3: // crack block
+                instance_create(xx,yy,oBlockStep);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 4: // beamblock
+                instance_create(xx,yy,oBlockShoot);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 5: // bombblock
+                instance_create(xx,yy,oBlockBomb);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 6: // missileblock
+                instance_create(xx,yy,oBlockMissile);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 7: // superblock
+                instance_create(xx,yy,oBlockSMissile);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 8: // pbombblock
+                instance_create(xx,yy,oBlockPBomb);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 9: // screwblock
+                instance_create(xx,yy,oBlockScrew);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 10: // speedblock
+                instance_create(xx,yy,oBlockSpeed);
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 25: // crack block
+                with (instance_create(xx,yy,oBlockStep)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 26: // beamblock
+                with (instance_create(xx,yy,oBlockShoot)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 27: // bombblock
+                with (instance_create(xx,yy,oBlockBomb)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 28: // missileblock
+                with (instance_create(xx,yy,oBlockMissile)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 29: // superblock
+                with (instance_create(xx,yy,oBlockSMissile)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 30: // pbombblock
+                with (instance_create(xx,yy,oBlockPBomb)){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 31: // screwblock
+                with instance_create(xx,yy,oBlockScrew){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 32: // speedblock
+                with instance_create(xx,yy,oBlockSpeed){
+                    regentime = -1;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),4);
+            break;
+            case 11: // spawn. also for filling grid
+                x = xx+8;
+                y = yy+16;
+                var s_x = x;
+                var s_y = y-8;
+            break;
+            case 12: // FREEDOM
+                instance_create(xx,yy,oTrialGoal);
+            break;
+            case 13: // spikes
+                with (instance_create(xx+2,yy+2,oSpikes4)){
+                    image_xscale = 0.75;
+                    image_yscale = 0.75;
+                }
+                ds_grid_set(grid,floor(xx/16),floor(yy/16),5);
+            break;
+            case 40:
+                instance_create(xx,yy,oTTWater);
+            break;
+            // items
+            case 14: // spiderball
+                instance_create(xx,yy+16,oTTSpider);
+            break;
+            case 15: // jumpball
+                instance_create(xx,yy+16,oTTSpring);
+            break;
+            case 16: // hijump
+                instance_create(xx,yy+16,oTTHijump);
+            break;
+            case 17: // spacejump
+                instance_create(xx,yy+16,oTTSpace);
+            break;
+            case 18: // bombs
+                instance_create(xx,yy+16,oTTBomb);
+            break;
+            case 19: // missile
+                instance_create(xx,yy+16,oTTMissile);
+            break;
+            case 20: // super
+                instance_create(xx,yy+16,oTTSuper);
+            break;
+            case 21: // power
+                instance_create(xx,yy+16,oTTPower);
+            break;
+            case 22: // screw
+                instance_create(xx,yy+16,oTTScrew);
+            break;
+            case 23: // speed
+                instance_create(xx,yy+16,oTTBooster);
+            break;
+            case 34: // morph
+                instance_create(xx,yy+16,oTTMorph);
+            break;
+            case 35: // pgrip
+                instance_create(xx,yy+16,oTTPGrip);
+            break;
+            case 24: // heal
+                instance_create(xx,yy,oTTHealField);
+            break;
+            case 33: // ammo
+                instance_create(xx,yy,oTTAmmoField);
+            break;
+            case 36: // etank
+                instance_create(xx,yy+16,oTTEnergy);
+            break;
+            case 37: // charge
+                instance_create(xx,yy+16,oTTCBeam);
+            break;
+            case 38: // wave
+                instance_create(xx,yy+16,oTTWBeam);
+            break;
+            case 39: // spazer
+                instance_create(xx,yy+16,oTTSBeam);
+            break;
+            case 41: // gravity
+                instance_create(xx,yy+16,oTTGravSuit);
+            break;
+        }
     }
 }
 

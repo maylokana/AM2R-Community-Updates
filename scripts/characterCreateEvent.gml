@@ -153,6 +153,8 @@ GRABBEDQUEENMORPH = 54;
 GRABBEDQUEENBELLY = 55;
 LOCKEDBALL = 60;
 DEFEATED = 100;
+// tt states
+RESPAWN = 101;
 // inputs:
 kLeft = 0;
 kLeftPushedSteps = 0;

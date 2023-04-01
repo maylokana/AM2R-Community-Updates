@@ -2,8 +2,13 @@
 if (room != rm_transition) {
     mtXPrev = x;
     mtYPrev = y;
+    // old "time" code (this allegedly desyncs demos)
+    /*
     time += 1;
     if (time > 100000000) time = 0;
+    */
+    // new "time" code
+    time = oTrialLogic.timer;
     xVelFrac = frac(abs(argument0));
     yVelFrac = frac(abs(argument1));
     xVelInteger = 0;
