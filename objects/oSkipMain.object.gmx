@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.tt_vers = "v2.0";
+            <string>global.tt_vers = "v0.5";
 global.tt_verr = 3;
 if (global.skip_mMenu == 1){ // skip to trial select
     room_change(trialselectroom,0);

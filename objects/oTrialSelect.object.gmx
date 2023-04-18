@@ -53,8 +53,6 @@ funny_text = choose(
     ":)",
 );
 
-funny_text = "Has enemies now";
-
 active = 1; // whether the menus are active
 
 // defunct stuff
